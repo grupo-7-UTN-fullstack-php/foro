@@ -50,7 +50,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `foroFullstack`.`usuario`
+-- Table `foroFullstack`.`usuarios`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `foroFullstack`.`usuario` (
   `idUsuario` INT NOT NULL,

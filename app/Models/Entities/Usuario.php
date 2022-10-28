@@ -14,6 +14,3 @@ class Usuario
     private $idEstado;
     private $idRol;
 }
-
-
-?>
