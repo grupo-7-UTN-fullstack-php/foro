@@ -29,7 +29,7 @@ class UsuarioController extends Controller
 
         $todosLosUsuarios = DB::select("select * from usuario");
 
-        $camposUsuario = array_map(function($e) {return $e->COLUMN_NAME;}, $camposUsuario);
+        $camposUsuario = array_map(static function($e) {return $e->COLUMN_NAME;}, $camposUsuario);
 
         return view("index",[
             'campos' => $camposUsuario,
@@ -42,7 +42,7 @@ class UsuarioController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
         return view("usuarios/crear");
 
