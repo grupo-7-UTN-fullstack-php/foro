@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('.../css/estilos.css')}}">
     <title>Foro</title>
 </head>
 <body>
@@ -15,7 +16,7 @@
     <form class="row g-3" action="{{route('usuarios.store')}}" method="post">
         @csrf
         <div class="container">
-            <div class="col-md-6 col-xs-6 col-sm-6">
+            <div class="col-md-6 col-xs-6 col-sm-4">
                 <label for="usuario" class="form-label">Usuario:</label>
                 <input type="text" class="form-control" id="usuario" placeholder="ingrese su nombre de usuario">
             </div>
@@ -49,7 +50,7 @@
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="gridCheck">
                 <label class="form-check-label" for="gridCheck">
-                    Validar
+                    Acepto los términos
                 </label>
             </div>
         </div>
