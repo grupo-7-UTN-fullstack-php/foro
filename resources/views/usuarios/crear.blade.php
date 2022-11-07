@@ -15,40 +15,75 @@
 <div class="container">
     <form class="row g-3" action="{{route('usuarios.store')}}" method="post">
         @csrf
-        <div class="container">
-            <div class="col-md-6 col-xs-6 col-sm-4">
-                <label for="usuario" class="form-label">Usuario:</label>
-                <input type="text" class="form-control" id="usuario" placeholder="ingrese su nombre de usuario">
-            </div>
+        <div class="col-md-6 col-xs-6 col-sm-12">
+            <label for="usuario" class="form-label">Usuario:</label>
+            <input type="text" class="form-control @error('usuario') is-invalid @enderror" value="{{old('usuario')}}"
+                   id="usuario" placeholder="Ingrese su nombre de usuario" minlength="2" required name="usuario">
+            @error('usuario')
+            <div class="alert alert-danger" class="form-label">{{$message}}</div>
+            @enderror
         </div>
         <div class="col-md-6 col-xs-6 col-sm-6">
-            <label for="nombre" class="form-label">Nombre:</label>
-            <input type="text" class="form-control" id="nombre" placeholder="ingrese su nombre completo">
+
+            <label for="nombre" class="form-label ">Nombre:</label>
+            <input type="text" class="form-control @error('nombre') is-invalid @enderror" value="{{old('nombre')}}"
+                   id="nombre" placeholder="Ingrese su nombre" name="nombre" minlength="2" required>
+            @error('nombre')
+            <div class="alert alert-danger">{{$message}}</div>
+            @enderror
         </div>
         <div class="col-md-6 col-xs-6 col-sm-6">
             <label for="apellido" class="form-label">Apellido:</label>
-            <input type="text" class="form-control" id="apellido" placeholder="ingrese su apellido">
+            <input type="text" class="form-control @error('apellido') is-invalid @enderror" value="{{old('apellido')}}"
+                   id="apellido" name="apellido" placeholder="Ingrese su apellido" minlength="2" required>
+            @error('apellido')
+            <div class="alert alert-danger">{{$message}}</div>
+            @enderror
         </div>
         <div class="col-md-6 col-xs-6 col-sm-6">
             <label for="email" class="form-label">Email:</label>
-            <input type="email" class="form-control" id="email" placeholder="ingrese su email">
+            <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}"
+                   id="email" name ="email" placeholder="Ingrese su email" minlength="2" required>
+            @error('email')
+            <div class="alert alert-danger">{{$message}}</div>
+            @enderror
+        </div>
+        <div class="col-md-6 col-xs-6 col-sm-6">
+            <label for="email_confirmation" class="form-label">Confirmar Email:</label>
+            <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email_confirmation')}}"
+                   id="email_confirmation" name="email_confirmation" placeholder="Confirme su email" minlength="2" required>
+            @error('email_confirmation')
+            <div class="alert alert-danger">{{$message}}</div>
+            @enderror
         </div>
         <div class="col-md-6 col-xs-6 col-sm-6">
             <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento:</label>
-            <input type="date" class="form-control" id="fecha_nacimiento">
+            <input type="date" class="form-control  @error('fecha_nacimiento') is-invalid @enderror" value="{{old('fecha_nacimiento')}}"
+                   id="fecha_nacimiento" name="fecha_nacimiento" required>
+            @error('fecha_nacimiento')
+            <div class="alert alert-danger">{{$message}}</div>
+            @enderror
         </div>
 
         <div class="col-md-6 col-xs-6 col-sm-6">
-            <label for="inputPassword4" class="form-label">Password:</label>
-            <input type="password" class="form-control" id="inputPassword4">
+            <label for="password" class="form-label">Contraseña:</label>
+            <input type="password" class="form-control  @error('password') is-invalid @enderror" value="{{old('password')}}"
+                   id="password" name="password" placeholder="Ingrese su contraseña"  minlength="8" required>
+            @error('password')
+            <div class="alert alert-danger">{{$message}}</div>
+            @enderror
         </div>
         <div class="col-md-6 col-xs-6 col-sm-6">
-            <label for="inputPassword5" class="form-label">Confirmar contraseña:</label>
-            <input type="password" class="form-control" id="inputPassword5">
+            <label for="password_confirmation" class="form-label">Confirmar contraseña:</label>
+            <input type="password" class="form-control  @error('password_confirmation') is-invalid @enderror" value="{{old('password_confirmation')}}"
+                   id="password_confirmation" name="password_confirmation" placeholder="Confirme su contraseña" minlength="8" required>
+            @error('password_confirmation')
+            <div class="alert alert-danger">{{$message}}</div>
+            @enderror
         </div>
         <div class="col-12">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <input class="form-check-input" type="checkbox" id="gridCheck" required>
                 <label class="form-check-label" for="gridCheck">
                     Acepto los términos
                 </label>
@@ -58,7 +93,7 @@
             <button type="submit" class="btn btn-primary">Registrarse</button>
         </div>
 
-
+{{--
         <label for="usuario">Nombre de Usuario:</label>
         <input class=" @error('usuario') is-invalid @enderror" value="{{old('usuario')}}" id="usuario" name="usuario"
                type="text" minlength="2" required><br>
@@ -106,10 +141,11 @@
                id="fecha_nacimiento" name="fecha_nacimiento" type="date" required><br>
         @error('fecha_nacimiento')
         <div class="alert alert-danger">{{$message}}</div>
-        @enderror
+         <button type="submit">Registrarse</button>
+        @enderror --}}
 
 
-        <button type="submit">Registrarse</button>
+
     </form>
 </div>
 

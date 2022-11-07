@@ -24,4 +24,4 @@ Route::resource("usuarios",UsuarioController::class,['except' => ['create']]);
 
 //Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\UsuarioController::class, 'index'])->name('home');

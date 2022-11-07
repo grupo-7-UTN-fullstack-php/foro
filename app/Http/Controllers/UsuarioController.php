@@ -53,11 +53,10 @@ class UsuarioController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
-        echo 'llegue';
 
         $reglas = [
             'usuario' => ['required','alpha_num','min:2','max:45'],
@@ -75,17 +74,19 @@ class UsuarioController extends Controller
 
         Validator::make($request->all(), $reglas, $mensajes)->validate();
 
-        $datosValidados = $validated = $request->except(['password_confirmation', 'email_confirmation']);
-        $datosPorDefecto = [
-            'idEstado' => 4,
-            'idRol' => 1,
-            'activo' => true
+
+        DB::transaction(function() use ($request){
+            $datosValidados = $validated = $request->except(['password_confirmation', 'email_confirmation','_token']);
+            $datosPorDefecto = [
+                'idEstado' => 2,
+                'idRol' => 1,
+                'activo' => true
             ];
+            DB::table('usuario')->insert(array_merge($datosValidados, $datosPorDefecto));
+        });
 
 
-        DB::table('usuario')->insert(array_merge($datosValidados, $datosPorDefecto));
-
-        return null;
+        return $this -> index();
     }
 
     /**
