@@ -42,7 +42,7 @@ class UsuarioController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function create(): View|Factory|Application
+    public function create()
     {
         return view("usuarios/crear");
 

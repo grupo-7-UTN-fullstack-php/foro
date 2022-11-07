@@ -22,6 +22,6 @@ Route::get('registrarse',"UsuarioController@create")->name('usuarios.store');
 Route::resource("usuarios",UsuarioController::class,['except' => ['create']]);
 
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
