@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ValidatedInput;
@@ -61,12 +62,14 @@ class UsuarioController extends Controller
     {
 
         $reglas = [
-            'usuario' => ['required', 'alpha_num', 'min:2', 'max:45'],
+
+            'usuario' => ['required', 'alpha_num', 'min:2', 'max:45', 'unique:usuario'],
             'nombre' => ['required', 'alpha_num', 'min:2,max:45'],
             'apellido' => ['required', 'alpha_num', 'min:2', 'max:45'],
-            'email' => ['required', 'confirmed', 'email:rfc,dns'],
+            'email' => ['required', 'confirmed', 'email:rfc,dns', 'unique:usuario'],
             'password' => ['required', 'confirmed', Password::min(8)->numbers()->mixedCase()],
             'fecha_nacimiento' => ['required', 'before:-18 years']
+
         ];
         $mensajes = [
             'password' => 'La contraseña debe contener al menos 8 caracteres incluyendo un número, una letra mayúscula y una letra minúscula',
@@ -78,8 +81,11 @@ class UsuarioController extends Controller
 
 
         DB::transaction(function () use ($request) {
-            $datosValidados = $validated = $request->except(['password_confirmation', 'email_confirmation', '_token']);
+
+            $datosValidados = $validated = $request->except(['password_confirmation', 'email_confirmation', '_token', 'password']);
+
             $datosPorDefecto = [
+                'password' => Hash::make($request->get('password')),
                 'idEstado' => 2,
                 'idRol' => 1,
                 'activo' => true
