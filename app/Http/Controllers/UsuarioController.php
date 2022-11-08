@@ -82,7 +82,7 @@ class UsuarioController extends Controller
 
         DB::transaction(function () use ($request) {
 
-            $datosValidados = $validated = $request->except(['password_confirmation', 'email_confirmation', '_token', 'password']);
+            $datosValidados = $validated = $request->except(['password_confirmation', 'email_confirmation','password']);
 
             $datosPorDefecto = [
                 'password' => Hash::make($request->get('password')),
