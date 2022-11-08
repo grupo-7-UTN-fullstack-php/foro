@@ -29,9 +29,11 @@ class UsuarioController extends Controller
 
         $todosLosUsuarios = DB::select("select * from usuario");
 
-        $camposUsuario = array_map(static function($e) {return $e->COLUMN_NAME;}, $camposUsuario);
+        $camposUsuario = array_map(static function ($e) {
+            return $e->COLUMN_NAME;
+        }, $camposUsuario);
 
-        return view("index",[
+        return view("index", [
             'campos' => $camposUsuario,
             'elementos' => $todosLosUsuarios
         ]);
@@ -52,19 +54,19 @@ class UsuarioController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
 
         $reglas = [
-            'usuario' => ['required','alpha_num','min:2','max:45'],
-            'nombre' => ['required','alpha_num','min:2,max:45'],
-            'apellido' => ['required','alpha_num','min:2','max:45'],
-            'email' => ['required','confirmed' , 'email:rfc,dns'],
-            'password' => ['required','confirmed',Password::min(8)->numbers()->mixedCase()],
-            'fecha_nacimiento' => ['required','before:-18 years']
+            'usuario' => ['required', 'alpha_num', 'min:2', 'max:45'],
+            'nombre' => ['required', 'alpha_num', 'min:2,max:45'],
+            'apellido' => ['required', 'alpha_num', 'min:2', 'max:45'],
+            'email' => ['required', 'confirmed', 'email:rfc,dns'],
+            'password' => ['required', 'confirmed', Password::min(8)->numbers()->mixedCase()],
+            'fecha_nacimiento' => ['required', 'before:-18 years']
         ];
         $mensajes = [
             'password' => 'La contraseña debe contener al menos 8 caracteres incluyendo un número, una letra mayúscula y una letra minúscula',
@@ -75,8 +77,8 @@ class UsuarioController extends Controller
         Validator::make($request->all(), $reglas, $mensajes)->validate();
 
 
-        DB::transaction(function() use ($request){
-            $datosValidados = $validated = $request->except(['password_confirmation', 'email_confirmation','_token']);
+        DB::transaction(function () use ($request) {
+            $datosValidados = $validated = $request->except(['password_confirmation', 'email_confirmation', '_token']);
             $datosPorDefecto = [
                 'idEstado' => 2,
                 'idRol' => 1,
@@ -86,13 +88,13 @@ class UsuarioController extends Controller
         });
 
 
-        return $this -> index();
+        return $this->index();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -103,7 +105,7 @@ class UsuarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -114,8 +116,8 @@ class UsuarioController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -126,7 +128,7 @@ class UsuarioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
