@@ -25,3 +25,6 @@ Route::resource("usuarios",UsuarioController::class,['except' => ['create']]);
 //Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\UsuarioController::class, 'index'])->name('home');
+Route::get('/login', function(){
+    return view ('usuarios/login');
+});
