@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Usuario;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -28,15 +29,17 @@ class UsuarioController extends Controller
                                             from INFORMATION_SCHEMA.COLUMNS
                                         where TABLE_NAME = 'usuario'");
 
-        $todosLosUsuarios = DB::select("select * from usuario");
+
+        //$todosLosUsuarios = DB::select("select * from usuario");
 
         $camposUsuario = array_map(static function ($e) {
             return $e->COLUMN_NAME;
         }, $camposUsuario);
 
+
         return view("index", [
-            'campos' => $camposUsuario,
-            'elementos' => $todosLosUsuarios
+            'campos' => Usuario::getColumns(),
+            'elementos' => Usuario::all()
         ]);
     }
 
@@ -79,20 +82,18 @@ class UsuarioController extends Controller
 
         Validator::make($request->all(), $reglas, $mensajes)->validate();
 
+        $datosValidados = $validated = $request->except(['password_confirmation', 'email_confirmation','password']);
 
-        DB::transaction(function () use ($request) {
+        $datosPorDefecto = [
+            'password' => Hash::make($request->get('password')),
+            'idEstado' => 2,
+            'idRol' => 1,
+            'activo' => true
+        ];
 
-            $datosValidados = $validated = $request->except(['password_confirmation', 'email_confirmation','password']);
-
-            $datosPorDefecto = [
-                'password' => Hash::make($request->get('password')),
-                'idEstado' => 2,
-                'idRol' => 1,
-                'activo' => true
-            ];
-            DB::table('usuario')->insert(array_merge($datosValidados, $datosPorDefecto));
-        });
-
+        $nuevoUsuario = new Usuario;
+        $nuevoUsuario->fill(array_merge($datosValidados,$datosPorDefecto));
+        $nuevoUsuario->save();
 
         return $this->index();
     }
