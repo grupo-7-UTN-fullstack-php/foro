@@ -25,18 +25,6 @@ class UsuarioController extends Controller
 
     public function index()
     {
-        $camposUsuario = DB::select("select COLUMN_NAME
-                                            from INFORMATION_SCHEMA.COLUMNS
-                                        where TABLE_NAME = 'usuario'");
-
-
-        //$todosLosUsuarios = DB::select("select * from usuario");
-
-        $camposUsuario = array_map(static function ($e) {
-            return $e->COLUMN_NAME;
-        }, $camposUsuario);
-
-
         return view("index", [
             'campos' => Usuario::getColumns(),
             'elementos' => Usuario::all()
