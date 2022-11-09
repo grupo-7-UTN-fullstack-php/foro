@@ -92,11 +92,12 @@ class LoginController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return Response
+     * @param  \Illuminate\Http\Request  $request
+     * @return Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $request->session()->invalidate();
+        return redirect(route('login.create'));
     }
 }

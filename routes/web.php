@@ -17,14 +17,19 @@ use \App\Http\Controllers\UsuarioController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/home', function () {
+    return view('home');
+})->name('home');
+
 
 //Usuarios
-Route::get('registrarse',"UsuarioController@create")->name('usuarios.store');
-Route::resource("usuarios",UsuarioController::class,['except' => ['create']]);
-Route::get('/home', [App\Http\Controllers\UsuarioController::class, 'index'])->name('home');
+Route::get('registrarse',"UsuarioController@create")->name('usuarios.create');
+Route::resource("usuarios",UsuarioController::class,['except' => ['create','index']]);
+Route::get('/usuarios', [UsuarioController::class,'index'])->middleware('auth')->name('usuarios.usuarios');
 
 //Auth::routes();
 
 //Login
-Route::get('/login', [\App\Http\Controllers\LoginController::class,'create'])->name('login.create');
+Route::get('/login',[\App\Http\Controllers\LoginController::class,'create'])->name('login.create');
 Route::post('/login', [\App\Http\Controllers\LoginController::class,'store'])->name('login.store');
+Route::post('/logout', [\App\Http\Controllers\LoginController::class,'destroy'])->name('login.destroy');
