@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `eh9qgjoxmmy0l0q9`.`usuario` (
   `idRol` INT NOT NULL,
   `activo` TINYINT NULL,
   `_token` VARCHAR(256) NULL,
-  `remebmer_token` VARCHAR(256) NULL,
+  `remember_token` VARCHAR(256) NULL,
   `updated_at` TIMESTAMP NULL,
   `created_at` TIMESTAMP NULL,
   PRIMARY KEY (`idUsuario`),
