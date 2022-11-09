@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends ModeloBase
 {
+    protected $table = "post";
+    protected $primaryKey = "idPost";
+
     use HasFactory;
 }

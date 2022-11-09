@@ -39,8 +39,6 @@ class UsuarioController extends Controller
     public function create()
     {
         return view("usuarios/register");
-
-
     }
 
     /**
@@ -70,7 +68,7 @@ class UsuarioController extends Controller
 
         Validator::make($request->all(), $reglas, $mensajes)->validate();
 
-        $datosValidados = $validated = $request->except(['password_confirmation', 'email_confirmation','password']);
+        $datosValidados = $request->except(['password_confirmation', 'email_confirmation', 'password']);
 
         $datosPorDefecto = [
             'password' => Hash::make($request->get('password')),
@@ -80,7 +78,7 @@ class UsuarioController extends Controller
         ];
 
         $nuevoUsuario = new Usuario;
-        $nuevoUsuario->fill(array_merge($datosValidados,$datosPorDefecto));
+        $nuevoUsuario->fill(array_merge($datosValidados, $datosPorDefecto));
         $nuevoUsuario->save();
 
         return $this->index();

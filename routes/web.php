@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\UsuarioController;
 
@@ -23,13 +25,14 @@ Route::get('/home', function () {
 
 
 //Usuarios
-Route::get('registrarse',"UsuarioController@create")->name('usuarios.create');
-Route::resource("usuarios",UsuarioController::class,['except' => ['create','index']]);
-Route::get('/usuarios', [UsuarioController::class,'index'])->middleware('auth')->name('usuarios.usuarios');
+Route::get('registrarse', "UsuarioController@create")->name('usuarios.create');
+Route::resource("usuarios", UsuarioController::class, ['except' => ['create', 'index']]);
+Route::get('/usuarios', [UsuarioController::class, 'index'])->middleware('auth')->name('usuarios.usuarios');
 
-//Auth::routes();
+//Post
+Route::resource('/post', PostController::class)->middleware('auth');
 
 //Login
-Route::get('/login',[\App\Http\Controllers\LoginController::class,'create'])->name('login.create');
-Route::post('/login', [\App\Http\Controllers\LoginController::class,'store'])->name('login.store');
-Route::post('/logout', [\App\Http\Controllers\LoginController::class,'destroy'])->name('login.destroy');
+Route::get('/login', [LoginController::class, 'create'])->name('login.create');
+Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+Route::post('/logout', [LoginController::class, 'destroy'])->name('login.destroy')->middleware('auth');

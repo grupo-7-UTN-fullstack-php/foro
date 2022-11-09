@@ -86,7 +86,7 @@
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="gridCheck" required>
                     <label class="form-check-label" for="gridCheck">
-                        Acepto los términos
+                        Acepto los términos y condiciones.
                     </label>
                 </div>
             </div>
