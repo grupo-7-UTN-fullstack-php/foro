@@ -8,7 +8,7 @@
         <H1>Iniciar Sesión</H1>
     </header>
     <div class="container">
-        <form class="row g-3" action={{--"{{route('usuarios.store')}}" method="post"--}}>
+        <form class="row g-3" action="{{route('login.store')}}" method="post">
             @csrf
             <div class="col-md-6 col-xs-6 col-sm-6">
                 <label for="email" class="form-label">Email:</label>

@@ -18,13 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Usuarios
 Route::get('registrarse',"UsuarioController@create")->name('usuarios.store');
 Route::resource("usuarios",UsuarioController::class,['except' => ['create']]);
-
+Route::get('/home', [App\Http\Controllers\UsuarioController::class, 'index'])->name('home');
 
 //Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\UsuarioController::class, 'index'])->name('home');
-Route::get('/login', function(){
-    return view ('usuarios/login');
-});
+//Login
+Route::get('/login', [\App\Http\Controllers\LoginController::class,'create'])->name('login.create');
+Route::post('/login', [\App\Http\Controllers\LoginController::class,'store'])->name('login.store');
