@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -15,13 +20,16 @@ class PostController extends Controller
      */
     public function index()
     {
-        return "hola mundo";
+        return view("index", [
+            'campos' => Post::getColumns(),
+            'elementos' => Post::all()
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function create()
     {
@@ -31,8 +39,8 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      * @throws ValidationException
      */
     public function store(Request $request)
@@ -49,21 +57,24 @@ class PostController extends Controller
         ];
 
         Validator::make($request->all(), $reglas, $mensajes)->validate();
+        $datosValidados = $request->except(['password_confirmation', 'email_confirmation', 'password']);//ver estos campos si es que se pasa alguno
+        $datosPorDefecto = [
+            'idEstadoPublicacion' => 2,
+            'activo' => true
+        ];
+        $post = new Post();
+        $post->fill(array_merge($datosValidados, $datosPorDefecto));
+        $post->save();
+        //$post->guardar($datosValidados);
 
-        $datosValidados = $request->except([]);
-
-        $nuevoUsuario = new Post;
-        $nuevoUsuario->fill(array_merge($datosValidados));
-        $nuevoUsuario->save();
-
-        return "post creado con éxito";
+        return to_route('post.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function show($id)
     {
@@ -73,8 +84,8 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function edit($id)
     {
@@ -84,9 +95,9 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $id
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -96,8 +107,8 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function destroy($id)
     {

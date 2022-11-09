@@ -2,8 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
-use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\UsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,10 +15,10 @@ use \App\Http\Controllers\UsuarioController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', static function () {
     return view('welcome');
 });
-Route::get('/home', function () {
+Route::get('/home', static function () {
     return view('home');
 })->name('home');
 

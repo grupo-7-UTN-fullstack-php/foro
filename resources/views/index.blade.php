@@ -12,7 +12,7 @@
 @section('contenido')
     <div class="container-fluid">
         <div class="table-responsive">
-            <table  class="table tabla table-sm w-auto table-striped table-bordered">
+            <table class="table tabla table-sm w-auto table-striped table-bordered">
                 <thead>
                 <tr>
                     @foreach($campos as $campo)
