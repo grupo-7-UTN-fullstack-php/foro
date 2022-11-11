@@ -8,7 +8,6 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 FROM php:8.1.10
 COPY --from=composer_build /app/ /app/
-COPY  docker/.env /var/www/html/.env
 WORKDIR /app
 CMD php artisan serve --host=0.0.0.0 --port $PORT
 EXPOSE $PORT
