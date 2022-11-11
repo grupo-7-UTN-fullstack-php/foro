@@ -4,7 +4,7 @@ WORKDIR /app
 COPY . /app
 RUN composer install --optimize-autoloader --no-dev --ignore-platform-reqs --no-interaction --no-plugins --no-scripts --prefer-dist
 
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt install -y \
         zlib1g-dev \
         libicu-dev \
         libxml2-dev \
