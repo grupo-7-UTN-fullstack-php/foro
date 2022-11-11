@@ -4,16 +4,17 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class navbar extends Component
+class post extends Component
 {
+    public $post;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($post)
     {
-        //
+        $this->post = $post;
     }
 
     /**
@@ -23,7 +24,11 @@ class navbar extends Component
      */
     public function render()
     {
-        return view('components.navbar');
+        return view('components.post');
+    }
+
+    public function getPost($id){
+        return \App\Models\Post::find($id);
     }
 
 }

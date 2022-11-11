@@ -19,15 +19,13 @@ use App\Http\Controllers\UsuarioController;
 Route::get('/', static function () {
     return view('home');
 });
-Route::get('/home', static function () {
-    return view('home');
-})->name('home');
+Route::get('/home', [PostController::class, 'home_index'])->name('home');
 
 
 //Usuarios
 Route::get('registrarse', "UsuarioController@create")->name('usuarios.create');
 Route::resource("usuarios", UsuarioController::class, ['except' => ['create', 'index']]);
-Route::get('/usuarios', [UsuarioController::class, 'index'])->middleware('auth')->name('usuarios.usuarios');
+Route::get('/usuarios', [UsuarioController::class, 'index'])->middleware('auth')->name('usuarios.index');
 
 //Post
 Route::resource('/post', PostController::class)->middleware('auth');

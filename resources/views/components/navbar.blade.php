@@ -12,7 +12,7 @@
                     <div class="container">
                         <div class="navbar-nav justify-content-start">
                             <a class="nav-item nav-link" href="{{route('post.create')}}">Postear</a>
-                            <a class="nav-item nav-link" href="{{route('usuarios.usuarios')}}">Usuarios</a>
+                            <a class="nav-item nav-link" href="{{route('usuarios.index')}}">Usuarios</a>
                         </div>
                     </div>
                     <div class="container">

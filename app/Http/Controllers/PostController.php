@@ -14,6 +14,18 @@ use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return string
+     */
+    public function home_index()
+    {
+        return view("home", [
+            'posts' => Post::all()
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -48,8 +60,8 @@ class PostController extends Controller
     {
         $reglas = [
 
-            'titulo' => ['required', 'alpha_num', 'min:2', 'max:45', 'unique:post'],
-            'contenido' => ['required', 'alpha_num', 'min:2,max:255'],
+            'titulo' => ['required', 'min:2', 'max:45', 'unique:post'],
+            'contenido' => ['required', 'min:2,max:255'],
 
         ];
         $mensajes = [

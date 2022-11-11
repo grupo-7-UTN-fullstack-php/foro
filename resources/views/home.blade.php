@@ -8,13 +8,15 @@
 @endsection
 
 @section('contenido')
-   <div id="main" class="container-fluid">
+   <div id="main" class="container-fluid overflow-hidden">
        <div  id="main-row" class="row h-100">
            <div class="col">
 
            </div>
-           <div class="col-6 text-center">
-                Aca van los posts
+           <div id="main-col" class="col-7 text-center overflow-auto">
+               @foreach($posts as $post)
+                   <x-post :post="$post"/>
+               @endforeach
            </div>
            <div class="col">
 
