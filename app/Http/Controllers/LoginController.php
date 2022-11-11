@@ -98,6 +98,7 @@ class LoginController extends Controller
     public function destroy(Request $request)
     {
         $request->session()->invalidate();
+
         return redirect(route('login.create'));
     }
 }

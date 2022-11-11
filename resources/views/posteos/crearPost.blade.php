@@ -20,7 +20,7 @@
             </div>
             <div class="mb-3">
                 <label for="textarea" class="form-label">Cuerpo</label>
-                <textarea class="form-control form-control @error('textarea') is-invalid @enderror" name="textarea" id="textarea"
+                <textarea class="form-control form-control @error('textarea') is-invalid @enderror" name="contenido" id="textarea"
                           rows="5"
                           placeholder="Escribe aqui..." value="{{old('textarea')}}" required></textarea>
                 @error('Textarea')

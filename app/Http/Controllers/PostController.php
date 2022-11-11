@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -48,25 +49,25 @@ class PostController extends Controller
         $reglas = [
 
             'titulo' => ['required', 'alpha_num', 'min:2', 'max:45', 'unique:post'],
-            'textarea' => ['required', 'alpha_num', 'min:2,max:255'],
+            'contenido' => ['required', 'alpha_num', 'min:2,max:255'],
 
         ];
         $mensajes = [
             'titulo' => 'algún mensaje a enviar',
-            'textarea' => 'superaste la cantidad de caracteres permitidos'
+            'contenido' => 'superaste la cantidad de caracteres permitidos'
         ];
 
         Validator::make($request->all(), $reglas, $mensajes)->validate();
-        $datosValidados = $request->except(['password_confirmation', 'email_confirmation', 'password']);//ver estos campos si es que se pasa alguno
+        $datosValidados = $request->except(['_token']);//ver estos campos si es que se pasa alguno
         $datosPorDefecto = [
-            'idEstadoPublicacion' => 2,
+            'idUsuario' => Auth::id(),
+            'idEstadoPublicacion' => 1,
             'activo' => true
         ];
         $post = new Post();
         $post->fill(array_merge($datosValidados, $datosPorDefecto));
         $post->save();
         //$post->guardar($datosValidados);
-
         return to_route('post.index');
     }
 

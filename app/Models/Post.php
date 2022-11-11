@@ -7,13 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends ModeloBase
 {
-    protected string $titulo = "";
+    protected $guarded = [];
+
+    /*protected string $titulo = "";
     protected string $contenido = "";
     protected int $activo;
     protected int $cant_comentarios;
     protected int $visitas;
     protected int $idUsuario;
-    protected int $idEstadoPublicacion;
+    protected int $idEstadoPublicacion;*/
 
 
     function guardar(\Request $request)
