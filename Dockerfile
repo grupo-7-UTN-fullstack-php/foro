@@ -3,15 +3,15 @@ FROM composer:2.3.8 as composer_build
 WORKDIR /app
 COPY . /app
 RUN composer install --optimize-autoloader --no-dev --ignore-platform-reqs --no-interaction --no-plugins --no-scripts --prefer-dist
-RUN apt-get update && apt-get install -y \
-    zlib1g-dev \
-    libicu-dev \
-    libxml2-dev \
-    libpq-dev \
-    vim \
-    && docker-php-ext-install pdo pdo_mysql zip intl xmlrpc soap opcache \
-    && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd
 
+RUN apt-get update && apt-get install -y \
+        zlib1g-dev \
+        libicu-dev \
+        libxml2-dev \
+        libpq-dev \
+        libzip-dev \
+        && docker-php-ext-install pdo pdo_mysql zip intl xmlrpc soap opcache \
+        && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd
 
 FROM php:8.1.10
 COPY --from=composer_build /app/ /app/
