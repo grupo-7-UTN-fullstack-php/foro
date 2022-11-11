@@ -5,7 +5,7 @@
 
 @section('contenido')
     <header>
-        <H1>Crear post</H1>
+        <H1>{{$titulo}}</H1>
     </header>
     <div class="container">
         <form class="row g-3" action="{{route('post.store')}}" method="post">

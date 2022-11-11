@@ -34,7 +34,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view("posteos/crearPost");
+        return view("posteos/post",['titulo'=>'Crear post']);
     }
 
     /**
