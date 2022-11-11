@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UsuarioController;
@@ -16,7 +17,7 @@ use App\Http\Controllers\UsuarioController;
 */
 
 Route::get('/', static function () {
-    return view('welcome');
+    return view('home');
 });
 Route::get('/home', static function () {
     return view('home');
@@ -35,3 +36,5 @@ Route::resource('/post', PostController::class)->middleware('auth');
 Route::get('/login', [LoginController::class, 'create'])->name('login.create');
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 Route::post('/logout', [LoginController::class, 'destroy'])->name('login.destroy')->middleware('auth');
+
+Route::resource('/comentario', ComentarioController::class)->middleware('auth');

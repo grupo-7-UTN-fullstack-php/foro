@@ -32,6 +32,23 @@
             </div>
         </form>
     </div>
+    <div class="container">
+        <form class="row g-3" action="{{route('comentario.create')}}" method="post">
+            @csrf
+            <div class="mb-3">
+                <label for="textareaComentario" class="form-label">Comentario</label>
+                <textarea class="form-control form-control @error('textarea') is-invalid @enderror" name="textareaComentario" id="textarea"
+                          rows="5"
+                          placeholder="Escribe aqui tu comentario..." value="{{old('textarea')}}" required></textarea>
+                @error('Textarea')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </form>
+    </div>
 @endsection
 
 
