@@ -4,10 +4,7 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
-use LaravelIdea\Helper\App\Models\_IH_Post_C;
 
 class Post extends ModeloBase
 {
@@ -28,33 +25,7 @@ class Post extends ModeloBase
      */
     public static function crearPost(Post $post): void
     {
-//        $reglas = [
-//
-//            'titulo' => ['required', 'min:2', 'max:45', 'unique:post'],
-//            'contenido' => ['required', 'min:2,max:255'],
-//
-//        ];
-//        $mensajes = [
-//            'titulo' => 'algún mensaje a enviar',
-//            'contenido' => 'superaste la cantidad de caracteres permitidos'
-//        ];
-//        Validator::make($request->all(), $reglas, $mensajes)->validate();
-//        $datosValidados = $request->except(['_token']);//ver estos campos si es que se pasa alguno
-//        $datosPorDefecto = [
-//            'idUsuario' => Auth::id(),
-//            'idEstadoPublicacion' => 1,
-//            'activo' => true,
-//            'cant_comentarios' => 0,
-//            'visitas' => 0
-//        ];
-//        $post = new Post();
-//        $post->fill(array_merge($datosValidados, $datosPorDefecto));
         $post->save();
-    }
-
-    public static function obtenerCamposTabla(): array
-    {
-        return self::getColumns();
     }
 
     public static function obtenerTodosLosPosts()
