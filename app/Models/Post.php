@@ -26,29 +26,29 @@ class Post extends ModeloBase
     /**
      * @throws ValidationException
      */
-    public static function crearPost(\Request $request): void
+    public static function crearPost(Post $post): void
     {
-        $reglas = [
-
-            'titulo' => ['required', 'min:2', 'max:45', 'unique:post'],
-            'contenido' => ['required', 'min:2,max:255'],
-
-        ];
-        $mensajes = [
-            'titulo' => 'algún mensaje a enviar',
-            'contenido' => 'superaste la cantidad de caracteres permitidos'
-        ];
-        Validator::make($request->all(), $reglas, $mensajes)->validate();
-        $datosValidados = $request->except(['_token']);//ver estos campos si es que se pasa alguno
-        $datosPorDefecto = [
-            'idUsuario' => Auth::id(),
-            'idEstadoPublicacion' => 1,
-            'activo' => true,
-            'cant_comentarios' => 0,
-            'visitas' => 0
-        ];
-        $post = new Post();
-        $post->fill(array_merge($datosValidados, $datosPorDefecto));
+//        $reglas = [
+//
+//            'titulo' => ['required', 'min:2', 'max:45', 'unique:post'],
+//            'contenido' => ['required', 'min:2,max:255'],
+//
+//        ];
+//        $mensajes = [
+//            'titulo' => 'algún mensaje a enviar',
+//            'contenido' => 'superaste la cantidad de caracteres permitidos'
+//        ];
+//        Validator::make($request->all(), $reglas, $mensajes)->validate();
+//        $datosValidados = $request->except(['_token']);//ver estos campos si es que se pasa alguno
+//        $datosPorDefecto = [
+//            'idUsuario' => Auth::id(),
+//            'idEstadoPublicacion' => 1,
+//            'activo' => true,
+//            'cant_comentarios' => 0,
+//            'visitas' => 0
+//        ];
+//        $post = new Post();
+//        $post->fill(array_merge($datosValidados, $datosPorDefecto));
         $post->save();
     }
 
@@ -64,7 +64,7 @@ class Post extends ModeloBase
 
     public static function obtenerPostsDeUnUsuario(int $id)
     {
-        return self::find($id)->get();
+        return self::where('post.idUsuario', '=', $id)->join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')->get();
     }
 
     public static function incrementarCantidadComentariosPost(Post $post)

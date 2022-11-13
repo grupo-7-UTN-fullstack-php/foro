@@ -34,11 +34,16 @@ class PostController extends Controller
      *
      * @return string
      */
-    public function index(Request $request)
+    public function index()
     {
-        return view("index", [
-            'campos' => Post::obtenerCamposTabla(),
-            'elementos' => Post::obtenerTodosLosPosts()
+//        return view("index", [
+//            'campos' => Post::obtenerCamposTabla(),
+//            'elementos' => Post::obtenerTodosLosPosts()
+//        ]);
+        $idUsuario = Auth::id();
+//        return $idUsuario;
+        return view("home", [
+            'posts' => Post::obtenerPostsDeUnUsuario(3)
         ]);
     }
 
@@ -61,28 +66,28 @@ class PostController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-//
-//        $reglas = [
-//            'titulo' => ['required', 'min:2', 'max:45', 'unique:post'],
-//            'contenido' => ['required', 'min:2,max:255'],
-//
-//        ];
-//        $mensajes = [
-//            'titulo' => 'algún mensaje a enviar',
-//            'contenido' => 'superaste la cantidad de caracteres permitidos'
-//        ];
-//
-//        Validator::make($request->all(), $reglas, $mensajes)->validate();
-//        $datosValidados = $request->except(['_token']);//ver estos campos si es que se pasa alguno
-//        $datosPorDefecto = [
-//            'idUsuario' => Auth::id(),
-//            'idEstadoPublicacion' => 1,
-//            'activo' => true
-//        ];
-//        $post = new Post();
-//        $post->fill(array_merge($datosValidados, $datosPorDefecto));
+
+        $reglas = [
+            'titulo' => ['required', 'min:2', 'max:45', 'unique:post'],
+            'contenido' => ['required', 'min:2,max:255'],
+
+        ];
+        $mensajes = [
+            'titulo' => 'algún mensaje a enviar',
+            'contenido' => 'superaste la cantidad de caracteres permitidos'
+        ];
+
+        Validator::make($request->all(), $reglas, $mensajes)->validate();
+        $datosValidados = $request->except(['_token']);//ver estos campos si es que se pasa alguno
+        $datosPorDefecto = [
+            'idUsuario' => Auth::id(),
+            'idEstadoPublicacion' => 1,
+            'activo' => true
+        ];
+        $post = new Post();
+        $post->fill(array_merge($datosValidados, $datosPorDefecto));
 //        $post->save();
-        Post::crearPost($request);
+        Post::crearPost($post);
         return to_route('post.index');
     }
 
@@ -94,11 +99,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-//        Auth::id()
-        return view("index", [
-            'campos' => Post::obtenerCamposTabla(),
-            'elementos' => Post::obtenerPostsDeUnUsuario($id)
-        ]);
+
 
     }
 
