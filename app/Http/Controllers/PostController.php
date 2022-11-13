@@ -36,9 +36,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $idUsuario = Auth::id();
+        $usuario = Auth::user();
+//        $idUsuario = Auth::id();
         return view("home", [
-            'posts' => Post::obtenerPostsDeUnUsuario($idUsuario)
+            'posts' => Post::obtenerPostsDeUnUsuario($usuario->getAuthIdentifier()),
+            'usuario' => $usuario
         ]);
     }
 

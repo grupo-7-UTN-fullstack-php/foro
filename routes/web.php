@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UsuarioController;
 
@@ -35,3 +36,5 @@ Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 Route::post('/logout', [LoginController::class, 'destroy'])->name('login.destroy')->middleware('auth');
 
 Route::resource('/comentario', ComentarioController::class)->middleware('auth');
+//Perfil
+Route::resource('perfil', PerfilController::class)->middleware('auth');

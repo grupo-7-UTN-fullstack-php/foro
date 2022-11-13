@@ -12,7 +12,7 @@
                     <div class="container">
                         <div class="navbar-nav justify-content-start">
                             <a class="nav-item nav-link" href="{{route('post.index')}}">Mis posts</a>
-                            <a class="nav-item nav-link" href="{{route('post.create')}}">Postear</a>{{-- Esto lo pondria dentro--}}
+                            <a class="nav-item nav-link" href="{{route('post.create')}}">Postear</a>
                             <a class="nav-item nav-link" href="{{route('usuarios.index')}}">Usuarios</a>
                         </div>
                     </div>
@@ -31,6 +31,11 @@
             <div class="container pe-0">
                 <div class="navbar-nav justify-content-end">
                     @if(\Illuminate\Support\Facades\Auth::check())
+                        <div>
+                            <a class="nav-item nav-link" href="{{route('perfil.index')}}">Ver perfil de {{$usuario->usuario}}</a>
+
+                        </div>
+
                         <form class="logout" method="post" action="{{route('login.destroy')}}">
                             @csrf
                             <button type="submit" class="nav-item btn btn-primary">Cerrar Sesión</button>
