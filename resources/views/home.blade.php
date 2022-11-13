@@ -15,7 +15,7 @@
            </div>
            <div id="main-col" class="col-7 text-center overflow-auto">
                @foreach($posts as $post)
-                   <x-post :post="$post"/>
+                   <x-post :post="$post"></x-post>
                @endforeach
            </div>
            <div class="col">

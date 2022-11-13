@@ -6,7 +6,7 @@
     <script src="{{asset('public/js/index.js')}}"></script>
 @endpush
 @section('titulo')
-   Ver post
+    Ver post
 @endsection
 
 @section('contenido')
@@ -27,6 +27,7 @@
                             <td class="fs-sm text-center text-wrap">@php echo $elemento->{$campo} @endphp</td>
                         @endforeach
                     </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>

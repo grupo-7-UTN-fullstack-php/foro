@@ -5,7 +5,7 @@
                 {{$post->titulo}}
             </div>
             <div id="autor">
-                by {{\App\Models\Usuario::find($post->idUsuario)->usuario}}
+                          by {{$post->usuario}}
             </div>
         </div>
         <div id="contenido-wrapper">

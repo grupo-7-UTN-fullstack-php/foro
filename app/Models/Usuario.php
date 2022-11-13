@@ -10,10 +10,44 @@ use Illuminate\Support\Facades\Schema;
 use Laravel\Sanctum\HasApiTokens;
 
 class Usuario extends Authenticatable
-{   
+{
+    protected string $usuario = "";
+    protected int $idUsuario;
+
+    /**
+     * @return int
+     */
+    public function getIdUsuario(): int
+    {
+        return $this->idUsuario;
+    }
+
+    /**
+     * @param int $idUsuario
+     */
+    public function setIdUsuario(int $idUsuario): void
+    {
+        $this->idUsuario = $idUsuario;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsuario(): string
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * @param string $usuario
+     */
+    public function setUsuario(string $usuario): void
+    {
+        $this->usuario = $usuario;
+    }
     protected $table = "usuario";
     protected $primaryKey = "idUsuario";
-    
+
     public static function getColumns() : array
     {
         global $table;

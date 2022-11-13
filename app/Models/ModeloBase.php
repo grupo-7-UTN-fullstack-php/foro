@@ -18,7 +18,7 @@ abstract class ModeloBase extends Model
 
     public static function getColumns() : array
     {
-        $reflect = new \ReflectionClass(get_called_class());
+        $reflect = new \ReflectionClass(static::class);
         return Schema::getColumnListing(strtolower($reflect->getShortName()));
     }
 }

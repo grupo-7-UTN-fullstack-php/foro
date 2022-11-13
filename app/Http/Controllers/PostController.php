@@ -7,6 +7,7 @@ use App\Models\Usuario;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -24,9 +25,10 @@ class PostController extends Controller
     public function home_index()
     {
         return view("home", [
-            'posts' => Post::all()
+            'posts' => Post::obtenerTodosLosPosts()
         ]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -47,18 +49,18 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view("posteos/post",['titulo'=>'Crear post']);
+        return view("posteos/post", ['titulo' => 'Crear post']);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      * @throws ValidationException
      */
-    public function store(Request $request)
-   {
+    public function store(Request $request): RedirectResponse
+    {
 //        $reglas = [
 //
 //            'titulo' => ['required', 'min:2', 'max:45', 'unique:post'],
@@ -88,11 +90,16 @@ class PostController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return Response
+     * @return Application|Factory|View
      */
     public function show($id)
     {
-        //
+//        Auth::id()
+        return view("index", [
+            'campos' => Post::obtenerCamposTabla(),
+            'elementos' => Post::obtenerPostsDeUnUsuario($id)
+        ]);
+
     }
 
     /**

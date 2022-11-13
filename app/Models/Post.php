@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class Post extends ModeloBase
 {
@@ -14,10 +17,14 @@ class Post extends ModeloBase
     protected int $activo;
     protected int $cant_comentarios;
     protected int $visitas;
-    //protected int $idUsuario;
-    //protected int $idEstadoPublicacion;
+    protected int $idUsuario;
+    protected string $usuario;
+    protected int $idEstadoPublicacion;
 
 
+    /**
+     * @throws ValidationException
+     */
     public static function crearPost(\Request $request): void
     {
         $reglas = [
@@ -49,30 +56,32 @@ class Post extends ModeloBase
         return self::getColumns();
     }
 
-    public static function obtenerTodosLosPosts(): array
+    public static function obtenerTodosLosPosts()
     {
-        return self::all();
+        return self::join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')->get();
     }
 
-    public static function obtenerCreadorPost(Post $post): array
+    public static function obtenerPostsDeUnUsuario(int $id)
     {
-        return self::select('post.usuario')
-            ->join('usuario', 'post.idUsuario', '=', 'usuario.idUsuario')
-            ->get()->where($id = 'usuario.idUsuario');
+        return self::find($id)->get();
     }
 
     public static function incrementarCantidadComentariosPost(Post $post)
     {
-        $unPost = Self::find($post);
-        ++$unPost->cant_comentarios;
-        $unPost->save();
+        $post->increment('cant_comentarios');
+        $post->save();
     }
 
     public static function decrementarCantidadComentariosPost(Post $post)
     {
-        $unPost = Self::find($post);
-        --$unPost->cant_comentarios;
-        $unPost->save();
+        $post->decrement('cant_comentarios');
+        $post->save();
+    }
+
+    public static function borrarPostDefinitivamente(Post $post)
+    {
+        $unPost = self::find($post);
+        $unPost->delete();
     }
 
     protected $table = "post";
