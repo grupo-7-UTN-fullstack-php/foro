@@ -12,7 +12,6 @@ use Laravel\Sanctum\HasApiTokens;
 class Usuario extends Authenticatable
 {
     protected string $usuario = "";
-    protected int $idUsuario;
 
     /**
      * @return int

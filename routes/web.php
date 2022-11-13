@@ -16,9 +16,8 @@ use App\Http\Controllers\UsuarioController;
 |
 */
 
-Route::get('/', static function () {
-    return view('home');
-});
+Route::get('/', [PostController::class, 'home_index']);
+
 Route::get('/home', [PostController::class, 'home_index'])->name('home');
 
 

@@ -5,7 +5,7 @@
                 {{$post->titulo}}
             </div>
             <div id="autor">
-                          by {{$post->usuario}}
+                by {{$post->usuario}}
             </div>
         </div>
         <div id="contenido-wrapper">

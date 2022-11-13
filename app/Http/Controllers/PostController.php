@@ -61,8 +61,8 @@ class PostController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-//        $reglas = [
 //
+//        $reglas = [
 //            'titulo' => ['required', 'min:2', 'max:45', 'unique:post'],
 //            'contenido' => ['required', 'min:2,max:255'],
 //

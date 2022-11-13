@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use LaravelIdea\Helper\App\Models\_IH_Post_C;
 
 class Post extends ModeloBase
 {
