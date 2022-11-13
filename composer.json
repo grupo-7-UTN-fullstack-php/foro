@@ -11,9 +11,12 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.0",
-        "laravelcollective/html": "^6.3"
+        "laravelcollective/html": "^6.3",
+        "ext-pdo": "*"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-latest"
+        ,
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",
