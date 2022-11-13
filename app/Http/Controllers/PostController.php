@@ -20,7 +20,7 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return string
+     *
      */
     public function home_index()
     {
@@ -37,7 +37,6 @@ class PostController extends Controller
     public function index()
     {
         $usuario = Auth::user();
-//        $idUsuario = Auth::id();
         return view("home", [
             'posts' => Post::obtenerPostsDeUnUsuario($usuario->getAuthIdentifier()),
             'usuario' => $usuario
@@ -83,7 +82,7 @@ class PostController extends Controller
         ];
         $post = new Post();
         $post->fill(array_merge($datosValidados, $datosPorDefecto));
-//        $post->save();
+
         Post::crearPost($post);
         return to_route('post.index');
     }
@@ -118,7 +117,7 @@ class PostController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id):void
     {
         //
     }
@@ -129,8 +128,8 @@ class PostController extends Controller
      * @param int $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(int $id):void
     {
-        //
+        Post::bajaLogicaPost($id);
     }
 }

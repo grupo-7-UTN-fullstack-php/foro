@@ -13,7 +13,7 @@ class Post extends ModeloBase
     protected string $titulo = "";
     protected string $contenido = "";
     protected int $activo;
-    protected int $cant_comentarios;
+//    protected int $cant_comentarios;
     protected int $visitas;
     protected int $idUsuario;
     protected string $usuario;
@@ -35,25 +35,34 @@ class Post extends ModeloBase
 
     public static function obtenerPostsDeUnUsuario(int $id)
     {
-        return self::where('post.idUsuario', '=', $id)->join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')->get();
+        return self::where('post.idUsuario', '=', $id)->
+        join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')->get();
     }
 
-    public static function incrementarCantidadComentariosPost(Post $post)
+    public static function incrementarCantidadComentariosPost(Post $post): void
     {
         $post->increment('cant_comentarios');
         $post->save();
     }
 
-    public static function decrementarCantidadComentariosPost(Post $post)
+    public static function decrementarCantidadComentariosPost(Post $post): void
     {
         $post->decrement('cant_comentarios');
         $post->save();
     }
 
-    public static function borrarPostDefinitivamente(Post $post)
+    public static function borrarPostDefinitivamente(Post $post): void
     {
         $unPost = self::find($post);
         $unPost->delete();
+    }
+
+    public static function bajaLogicaPost(int $id): void
+    {
+        $unPost = self::find($id);
+        $unPost->activo = false;
+        $unPost->save();
+
     }
 
     protected $table = "post";
