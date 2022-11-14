@@ -4,7 +4,7 @@ WORKDIR /app
 COPY . /app
 #RUN apt-get update && apt-get install -y \ git \ curl \ libpng-dev \ libonig-dev \ libxm12-dev \ zip \ unzip
 RUN composer install --optimize-autoloader --no-dev --ignore-platform-reqs --no-interaction --no-plugins --no-scripts --prefer-dist
-RUN docker-php-ext-install mysqli pdo pdo_mysql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install mysqli pdo pdo_mysql exif pcntl bcmath gd
 
 
 FROM php:8.1.10
