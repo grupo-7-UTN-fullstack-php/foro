@@ -14,7 +14,7 @@
     <title>@yield('titulo')</title>
 </head>
 <body @yield('body_atrrib')>
-<x-navbar :usuario="$usuario"></x-navbar>
+<x-navbar ></x-navbar>
 @yield('contenido')
 @stack('scripts')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

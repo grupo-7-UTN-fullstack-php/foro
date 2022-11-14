@@ -32,8 +32,7 @@
                 <div class="navbar-nav justify-content-end">
                     @if(\Illuminate\Support\Facades\Auth::check())
                         <div>
-                            <a class="nav-item nav-link" href="{{route('perfil.index')}}">Ver perfil
-                                de {{$usuario->usuario}}</a>
+                            <a class="nav-item nav-link" href="{{route('perfil.index')}}">Ver perfil</a>
 
                         </div>
 
