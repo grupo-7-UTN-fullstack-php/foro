@@ -2,9 +2,10 @@ FROM composer:2.3.8 as composer_build
 
 WORKDIR /app
 COPY . /app
+RUN composer install apt-get --optimize-autoloader --no-dev --ignore-platform-reqs --no-interaction --no-plugins --no-scripts --prefer-dist
 RUN set -ex; \
-	apt update; \
-	apt install -y --no-install-recommends \
+	apt-get update; \
+	apt-get install -y --no-install-recommends \
 		autoconf \
 		automake \
 		bzip2 \
@@ -46,7 +47,6 @@ RUN set -ex; \
 		xz-utils \
 		zlib1g-dev \
 		\
-RUN composer install --optimize-autoloader --no-dev --ignore-platform-reqs --no-interaction --no-plugins --no-scripts --prefer-dist
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 
