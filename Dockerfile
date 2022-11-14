@@ -3,8 +3,8 @@ FROM composer:2.3.8 as composer_build
 WORKDIR /app
 COPY . /app
 RUN set -ex; \
-	yum update; \
-	yum install -y --no-install-recommends \
+	apt update; \
+	apt install -y --no-install-recommends \
 		autoconf \
 		automake \
 		bzip2 \
