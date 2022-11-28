@@ -1,4 +1,4 @@
-<div class="post-wrapper">
+<div id="{{$post->idPost}}" class="post-wrapper">
     <div class="post flex-column">
         <div class="header d-inline-flex flex-row mx-0 px-4 align-items-baseline">
             <div class="titulo">

@@ -21,6 +21,12 @@
         .content{
             height: 100%;
         }
+        #main{
+            height: 100%;
+        }
+        #main-row{
+            height: 100%;
+        }
     </style>
     @stack('styles')
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -30,7 +36,9 @@
 <body @yield('body_atrrib')>
 <x-navbar ></x-navbar>
 <div class="content">
-    @yield('contenido')
+    <div id="main" class="container-fluid">
+         @yield('contenido')
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

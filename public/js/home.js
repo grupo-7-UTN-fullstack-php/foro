@@ -28,3 +28,9 @@ $(".autor span").hover(function(){
         $(this).css("text-decoration","none");
     });
 
+$('*').filter(function () {
+    return $(this).css('cursor') == 'pointer'
+}).click(function(){
+    const id = $(this).closest('.post-wrapper').attr('id');
+    window.location = "post/"+id;
+});

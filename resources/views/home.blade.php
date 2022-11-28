@@ -10,17 +10,15 @@
 @endsection
 
 @section('contenido')
-    <div id="main" class="container-fluid overflow-hidden">
-        <div id="main-row" class="row h-100">
-            <div class="col-xl-3">
-            </div>
-            <div id="main-col" class="col text-center overflow-auto">
-                @foreach($posts as $post)
-                    <x-post :post="$post"></x-post>
-                @endforeach
-            </div>
-            <div class="col-xl-3">
-            </div>
+    <div id="main-row" class="row">
+        <div class="col-xl-3">
+        </div>
+        <div id="main-col" class="col text-center overflow-auto">
+            @foreach($posts as $post)
+                <x-post :post="$post"></x-post>
+            @endforeach
+        </div>
+        <div class="col-xl-3">
         </div>
     </div>
 @endsection

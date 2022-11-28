@@ -1,0 +1,16 @@
+#main-col{
+    background-color: #F6FAFF;
+    height: 100%;
+}
+#post{
+    background-color: white;
+    margin: 2%;
+    padding: 2%;
+}
+#titulo{
+    font-weight: bold;
+    font-size: 3rem;
+}
+#contenido{
+    font-size: 1.5rem;
+}
