@@ -17,22 +17,8 @@
             <div class="overlay"></div>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="bar row">
-            <a href="#" class="save col-1 col1-custom border-end">
-                SAVE
-            </a>
-            <a href="#" class="col text-center border-end">
-                Like
-            </a>
-            <a href="#" class="col text-center border-end">
-                Comentar
-            </a>
-            <a href="#" class="col text-center">
-                Reportar
-            </a>
-        </div>
-    </div>
+    <x-reaction-bar></x-reaction-bar>
+
 </div>
 
 

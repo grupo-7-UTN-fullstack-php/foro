@@ -28,7 +28,8 @@ Route::resource("usuarios", UsuarioController::class, ['except' => ['create', 'i
 Route::get('/usuarios', [UsuarioController::class, 'index'])->middleware('auth')->name('usuarios.index');
 
 //Post
-Route::resource('/post', PostController::class)->middleware('auth');
+Route::resource('/post', PostController::class)->except(['show'])->middleware('auth');
+Route::get('post/{id}', [PostController::class, 'show'])->name('post.show');
 
 //Login
 Route::get('/login', [LoginController::class, 'create'])->name('login.create');

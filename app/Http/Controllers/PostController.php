@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comentario;
 use App\Models\Post;
 use App\Models\Usuario;
 use Illuminate\Contracts\Foundation\Application;
@@ -95,7 +96,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        return view('posteos/post_show',["post"=>Post::obtenerPost($id)]);
+        return view('posteos/post_show',["post"=>Post::obtenerPost($id),"comentarios"=>Comentario::obtenerTodosLosComentarios($id)]);
     }
 
     /**

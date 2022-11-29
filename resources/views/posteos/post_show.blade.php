@@ -15,6 +15,9 @@
         </div>
         <div id="main-col" class="col">
             <x-post :post="$post"></x-post>
+            @foreach($comentarios as $comentario)
+                <x-comentario :comentario="$comentario"></x-comentario>
+            @endforeach
         </div>
         <div class="col-xl-3">
 
