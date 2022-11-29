@@ -4,6 +4,7 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 class Post extends ModeloBase
@@ -26,6 +27,13 @@ class Post extends ModeloBase
     public static function crearPost(Post $post): void
     {
         $post->save();
+    }
+
+    public static function obtenerPost(int $id)
+    {
+        return self::where('post.idPost', '=', $id)->
+        join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')->get()[0];
+
     }
 
     public static function obtenerTodosLosPosts()
