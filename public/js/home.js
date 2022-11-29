@@ -12,6 +12,14 @@ function colorAlpha(color,alpha){
     return nuevoColor + "," + alpha + ")";
 }
 
+function irAPost(elemento){
+    const id = elemento.closest('.post-wrapper').attr('id');
+    window.location = "post/"+id;
+}
+function comentable() {
+    return false;
+}
+
 $(".titulo").hover(function(){
     cambiarColor($(this),"royalblue");
 },
@@ -29,8 +37,10 @@ $(".autor span").hover(function(){
     });
 
 $('*').filter(function () {
-    return $(this).css('cursor') == 'pointer'
+    return $(this).css('cursor') == 'pointer';
 }).click(function(){
-    const id = $(this).closest('.post-wrapper').attr('id');
-    window.location = "post/"+id;
+   irAPost($(this));
 });
+$('.comentar').click(function(){
+    irAPost($(this));
+})

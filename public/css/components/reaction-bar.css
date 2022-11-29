@@ -1,0 +1,35 @@
+.bar{
+    font-size: 0.9rem;
+    background-color: #ECF3F6;
+    cursor: pointer;
+}
+.bar a{
+    color: #4a5568;
+    text-decoration: none;
+}
+.save {
+    width: 3.6vw;
+}
+
+.form-comentario{
+    padding-left: 2rem;
+    padding-right: 6rem;
+    display: none;
+
+}
+.comentario-label{
+    font-size: 1rem;
+    text-align: left;
+    margin: 1rem 1rem 1rem 0;
+    padding-left: 0;
+}
+.area-comentario{
+    height: 12rem;
+}
+.comentario-submit{
+    display: flex;
+    width: 10%;
+    text-align: center;
+    justify-content: center;
+    margin: 2rem 0 0 0;
+}
