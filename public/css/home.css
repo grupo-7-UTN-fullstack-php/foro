@@ -1,22 +1,3 @@
-#main{
-    margin: 0;
-    padding: 0;
-}
-#main-row{
-    background-color: #e2e8f0;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    border: 0;
-    box-sizing: border-box;
-}
-#main-col{
-    color: #4a5568;
-    background-color: #F6FAFF;
-    text-align: center;
-    font-size: 3em;
-    height: 100%;
-}
 .post-wrapper{
     margin: 0.64em;
 }

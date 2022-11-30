@@ -41,12 +41,12 @@
     background-image: linear-gradient(transparent 50%,white);
     pointer-events:none;
 }
-a:hover{
+.autor span a:hover{
     color: inherit;
     filter: brightness(90%);
     text-decoration: underline;
 }
-a{
+.autor span a{
     color: inherit;
     text-decoration: none;
 }

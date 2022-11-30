@@ -1,0 +1,19 @@
+#main-col{
+    padding-top: 0.8%;
+}
+.perfil-wrapper{
+    margin: 0;
+}
+.perfil{
+    margin: 1%;
+    text-align: left;
+    font-size: 1.4rem;
+}
+.username{
+    padding-left: 0;
+}
+.content .container-fluid{
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: space-between;
+}

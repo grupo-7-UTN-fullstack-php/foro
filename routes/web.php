@@ -29,7 +29,7 @@ Route::get('/usuarios', [UsuarioController::class, 'index'])->middleware('auth')
 Route::get('perfil/{username}',[UsuarioController::class,'show'])->name('usuarios.show');
 
 //Post
-Route::resource('/post', PostController::class)->except(['show','store'])->middleware('auth');
+Route::resource('/post', PostController::class)->except(['show'])->middleware('auth');
 Route::get('post/{id}', [PostController::class, 'show'])->name('post.show');
 
 

@@ -1,0 +1,32 @@
+html{
+    height: 100%;
+    position: relative;
+}
+body{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.content{
+    height: 100%;
+}
+#main{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+#main-row{
+    background-color: #e2e8f0;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+#main-col{
+    color: #4a5568;
+    background-color: #F6FAFF;
+    text-align: center;
+    font-size: 3em;
+    height: 100%;
+}
