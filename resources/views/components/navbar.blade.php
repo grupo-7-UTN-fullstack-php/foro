@@ -32,7 +32,7 @@
                 <div class="navbar-nav justify-content-end">
                     @if(\Illuminate\Support\Facades\Auth::check())
                         <div>
-                            <a class="nav-item nav-link" href="{{route('perfil.index')}}">Ver perfil</a>
+                            <a class="nav-item nav-link" href="{{route('usuarios.show',['username'=> \App\Models\Usuario::encontrarUsername(\Illuminate\Support\Facades\Auth::id())->usuario  ] )}}">Ver perfil</a>
 
                         </div>
 

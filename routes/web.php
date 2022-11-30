@@ -24,8 +24,9 @@ Route::get('/home', [PostController::class, 'home_index'])->name('home');
 
 //Usuarios
 Route::get('registrarse', "UsuarioController@create")->name('usuarios.create');
-Route::resource("usuarios", UsuarioController::class, ['except' => ['create', 'index']]);
+Route::resource("usuarios", UsuarioController::class, ['except' => ['create', 'index','show']]);
 Route::get('/usuarios', [UsuarioController::class, 'index'])->middleware('auth')->name('usuarios.index');
+Route::get('perfil/{username}',[UsuarioController::class,'show'])->name('usuarios.show');
 
 //Post
 Route::resource('/post', PostController::class)->except(['show','store'])->middleware('auth');
@@ -41,4 +42,4 @@ Route::post('/logout', [LoginController::class, 'destroy'])->name('login.destroy
 Route::post('post/{id}', [ComentarioController::class, 'store'])->name('comentario.store')->middleware('auth');
 
 //Perfil
-Route::resource('perfil', PerfilController::class)->middleware('auth');
+//Route::resource('perfil', PerfilController::class)->middleware('auth');

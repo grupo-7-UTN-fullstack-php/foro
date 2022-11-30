@@ -94,9 +94,12 @@ class UsuarioController extends Controller
      * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show($username)
     {
-        //
+        $usuario = Usuario::encontrarPorUsername($username);
+        if($usuario == null)
+            abort('404');
+        return view('usuarios/perfil',['usuario' => $usuario]);
     }
 
     /**
