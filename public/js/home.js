@@ -20,22 +20,6 @@ function comentable() {
     return false;
 }
 
-$(".titulo").hover(function(){
-    cambiarColor($(this),"royalblue");
-},
-function(){
-    devolverColor($(this));
-});
-
-$(".autor span").hover(function(){
-        cambiarColor($(this),colorAlpha($(this).css("color"), 0.8));
-        $(this).css("text-decoration","underline");
-    },
-    function(){
-        devolverColor($(this));
-        $(this).css("text-decoration","none");
-    });
-
 $('*').filter(function () {
     return $(this).css('cursor') == 'pointer';
 }).click(function(){

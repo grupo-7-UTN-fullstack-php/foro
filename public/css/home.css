@@ -31,44 +31,7 @@
     height: fit-content;
     width: 100%;
 }
-.titulo{
-    font-weight: bold;
-    font-size: 0.8em;
-    margin: 0;
-    padding: 0;
-    cursor: pointer;
-}
-.autor{
-    text-align: left;
-    color: #a0aec0;
-    font-size: 0.4em;
-    padding-left: 0.4em;
-    font-weight: bold;
-    cursor: pointer;
-}
-.contenido-wrapper {
-    height: 83%;
-    box-sizing: border-box;
-    position: relative;
-}
 
-.contenido {
-    height: 100%;
-    box-sizing: border-box;
-    text-align: left;
-    font-size: 0.5em;
-}
-.contenido div{
-    cursor: text;
-}
-
-.overlay{
-    height: 100%;
-    position: relative;
-    bottom: 100%;
-    background-image: linear-gradient(transparent 50%,white);
-    pointer-events:none;
-}
 
 .bar{
     font-size: 0.3em;
