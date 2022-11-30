@@ -17,7 +17,7 @@
             <div class="overlay"></div>
         </div>
     </div>
-    <x-reaction-bar></x-reaction-bar>
+    <x-reaction-bar idPost="{{$post->idPost}}"></x-reaction-bar>
 
 </div>
 

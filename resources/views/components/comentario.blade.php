@@ -7,5 +7,5 @@
             {{$comentario->contenido}}
         </div>
     </div>
-    <x-reaction-bar></x-reaction-bar>
+    <x-reaction-bar idPost="{{$comentario->idComentario}}"></x-reaction-bar>
 </div>

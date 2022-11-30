@@ -28,14 +28,17 @@ Route::resource("usuarios", UsuarioController::class, ['except' => ['create', 'i
 Route::get('/usuarios', [UsuarioController::class, 'index'])->middleware('auth')->name('usuarios.index');
 
 //Post
-Route::resource('/post', PostController::class)->except(['show'])->middleware('auth');
+Route::resource('/post', PostController::class)->except(['show','store'])->middleware('auth');
 Route::get('post/{id}', [PostController::class, 'show'])->name('post.show');
+
 
 //Login
 Route::get('/login', [LoginController::class, 'create'])->name('login.create');
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 Route::post('/logout', [LoginController::class, 'destroy'])->name('login.destroy')->middleware('auth');
 
-Route::resource('/comentario', ComentarioController::class)->middleware('auth');
+//Comentario
+Route::post('post/{id}', [ComentarioController::class, 'store'])->name('comentario.store')->middleware('auth');
+
 //Perfil
 Route::resource('perfil', PerfilController::class)->middleware('auth');

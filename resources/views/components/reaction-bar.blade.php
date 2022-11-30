@@ -18,8 +18,9 @@
         @if(Auth::check())
             @once
                 @push('comentario')
-                    <form class="form-comentario row hidden" action="#" method="post">
+                    <form class="form-comentario row hidden" action="{{route('comentario.store', $idPost)}}" method="post">
                         @csrf
+                        <input type="hidden" id="idPost" name="idPost" value="{{$idPost}}">
                         <label for="comentario" class="comentario-label"></label>
                         <textarea class="area-comentario form-control"
                                id="comentario" name="contenido" placeholder="Comentario" minlength="10" required></textarea>

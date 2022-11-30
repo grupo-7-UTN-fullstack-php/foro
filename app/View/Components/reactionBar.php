@@ -6,14 +6,15 @@ use Illuminate\View\Component;
 
 class reactionBar extends Component
 {
+    public $idPost;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($idPost)
     {
-        //
+        $this->idPost = $idPost;
     }
 
     /**
