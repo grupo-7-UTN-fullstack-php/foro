@@ -10,7 +10,7 @@
 @section('contenido')
     <div id="main-row" class="row">
         <div class="col-3"></div>
-        <div id="main-col" class="col">
+        <div id="main-col" class="col overflow-auto">
             <div class="perfil-wrapper">
                 <div class="perfil">
                     <div id="header container-fluid">

@@ -29,6 +29,7 @@
     font-size: 0.5em;
     word-wrap: break-word;
     display: flex;
+
 }
 .contenido div{
     cursor: text;

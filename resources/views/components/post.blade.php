@@ -20,6 +20,10 @@
     </div>
     <x-reaction-bar idPost="{{$post->idPost}}"></x-reaction-bar>
 
+    <div>
+
+    </div>
+
 </div>
 
 

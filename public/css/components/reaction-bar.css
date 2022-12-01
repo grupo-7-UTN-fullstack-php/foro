@@ -1,14 +1,45 @@
+.bar-wrapper{
+    padding: 0;
+}
 .bar{
     font-size: 0.9rem;
-    background-color: #ECF3F6;
+    padding: 0 0 0 0.3vw;
+    background-color: white;
+}
+.reactions{
+    display: flex;
+    justify-content: end;
+    padding-right: 7%;
+}
+.reaction{
+    padding: 0.5rem 1rem;
+
+
+}
+.reaction img{
+    height: 25px;
+    margin: auto;
+    display: block;
     cursor: pointer;
 }
-.bar a{
-    color: #4a5568;
-    text-decoration: none;
+
+.save-wrapper{
+    display: flex;
+    align-items: start;
 }
 .save {
-    width: 3.6vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 50px;
+    align-self: start;
+    padding: 0;
+}
+.save img{
+    margin: 0;
+    height: 40px;
+    position: relative;
 }
 
 .form-comentario{
