@@ -13,15 +13,23 @@
 }
 .reaction{
     padding: 0.5rem 1rem;
-
-
 }
-.reaction img{
+.reaction svg .svg-clicked{
+    fill-rule: nonzero;
+    fill: royalblue;
+}
+.reaction svg:hover{
+    fill: royalblue;
+}
+
+.reaction svg{
     height: 25px;
+    width: 25px;
     margin: auto;
     display: block;
     cursor: pointer;
 }
+
 
 .save-wrapper{
     display: flex;

@@ -3,17 +3,16 @@
     <link rel="stylesheet" href="{{asset('css/components/reaction-bar.css')}}" type="text/css">
 @endpush
 @prepend('scripts')
-    <script src="{{asset('js/comentario.js')}}"></script>
+    <script src="{{asset('js/reaction-bar.js')}}"></script>
 @endprepend
 @endonce
 <div class="bar-wrapper container-fluid">
     <div class="bar">
-
         <div class="reactions">
             <div class="like reaction">
-                <img src="{{asset('svg/like.svg')}}" alt="">
+                {!! file_get_contents(asset('svg/like.svg'))!!}
             </div>
-            <a
+            <div
             @if(Auth::check())
                 @once
                     @push('comentario')
@@ -26,24 +25,35 @@
                             <button type="submit" class="comentario-submit btn btn-primary">Comentar</button>
                         </form>
                     @endpush
+                    @prepend('scripts')
+                        <script src="{{asset('js/comentario.js')}}"></script>
+                    @endprepend
                 @endonce
             @else
-                href="{{route('login.create')}}"
+                @push('scripts')
+                    <script>
+                        $(".reaction svg").click(function() {
+                            window.open("{{route('login.create')}}");
+                        });
+                    </script>
+                @endpush
+
             @endif
             class="comentar reaction text-center">
-            <img src="{{asset('svg/comment.svg')}}" alt="">
-            </a>
 
+            {!! file_get_contents(asset('svg/comment.svg'))!!}
+
+            </div>
 
             <div class="report reaction">
-                <img src="{{asset('svg/report.svg')}}" alt="">
+                {!! file_get_contents(asset('svg/report.svg'))!!}
             </div>
         </div>
-        <div class="save-wrapper">
-            <a href="" class="save reaction">
-                <img src="{{asset('svg/bookmark.svg')}}" alt="">
-            </a>
-        </div>
+            <div class="save-wrapper">
+                <a href="" class="save reaction">
+                    {!! file_get_contents(asset('svg/bookmark.svg'))!!}
+                </a>
+            </div>
     </div>
 </div>
 @stack('comentario')

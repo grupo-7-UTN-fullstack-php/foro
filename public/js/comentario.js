@@ -1,12 +1,8 @@
-function comentable() {
-    return true;
-}
-let isClicked = false
-$('.comentar').click(function(){
-    if(comentable())
-        if(isClicked)
-            $(this).closest('.bar-wrapper').next().css('display', 'none');
-        else
-            $(this).closest('.bar-wrapper').next().css('display', 'flex');
-        isClicked = !isClicked;
+$('.comentar svg').click(function(){
+    $(this).closest(".bar-wrapper").next().slideToggle(400);
+});
+$(".reaction").css('max-height', $(".reaction").css('height'));
+
+$(".reaction svg").click(function() {
+    $(this).children().toggleClass("svg-clicked");
 });
