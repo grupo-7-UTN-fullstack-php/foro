@@ -33,7 +33,7 @@
                 @push('scripts')
                     <script>
                         $(".reaction svg").click(function() {
-                            window.open("{{route('login.create')}}");
+                            window.location = "{{route('login.create')}}";
                         });
                     </script>
                 @endpush
