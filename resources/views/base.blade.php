@@ -35,7 +35,10 @@
     let contentHeight = "calc(100% - "+$("#navbar").css("height")+")";
     $(".content").css("height",contentHeight);
 
+    const rutaBase = "{{route('root')}}" ;
+
 </script>
 @stack('scripts')
+@stack('scripts-after')
 </body>
 </html>

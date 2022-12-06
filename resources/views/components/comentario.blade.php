@@ -1,4 +1,4 @@
-<div id="{{$comentario->idPost}}.{{$comentario->idComentario}}" class="comentario-wrapper">
+<div post="{{$comentario->idPost}}" id-publicacion="{{$comentario->idComentario}}" class="publicacion comentario-wrapper">
     <div  class="comentable comentario">
         <div class="autor">
             {{$comentario->usuario}}
@@ -7,5 +7,5 @@
             {{$comentario->contenido}}
         </div>
     </div>
-    <x-reaction-bar idPost="{{$comentario->idComentario}}"></x-reaction-bar>
+    <x-reaction-bar id="{{$comentario->idComentario}}"/>
 </div>

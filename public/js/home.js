@@ -13,7 +13,7 @@ function colorAlpha(color,alpha){
 }
 
 function irAPost(elemento){
-    const id = elemento.closest('.post-wrapper').attr('id');
+    const id = elemento.closest('.post-wrapper').attr('id-publicacion');
     window.location = "post/"+id;
 }
 function comentable() {

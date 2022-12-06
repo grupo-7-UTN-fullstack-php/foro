@@ -14,3 +14,5 @@ $(".comentar svg").click(function() {
     if(comentable())
         $(this).children().toggleClass("svg-clicked");
 });
+
+

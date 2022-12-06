@@ -1,7 +1,7 @@
 @prepend('styles')
     <link rel="stylesheet" href="{{asset('css/components/post.css')}}" type="text/css">
 @endprepend
-<div id="{{$post->idPost}}" class="post-wrapper">
+<div id-publicacion="{{$post->idPost}}" class="publicacion post-wrapper">
     <div class="post flex-column">
         <div class="header d-inline-flex flex-row mx-0 px-4 align-items-baseline">
             <div class="titulo">
@@ -18,7 +18,7 @@
             <div class="overlay"></div>
         </div>
     </div>
-    <x-reaction-bar idPost="{{$post->idPost}}"></x-reaction-bar>
+    <x-reaction-bar id="{{$post->idPost}}"/>
 
     <div>
 
