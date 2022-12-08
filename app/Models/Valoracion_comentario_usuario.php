@@ -13,7 +13,7 @@ class Valoracion_comentario_usuario extends ModeloBase
     protected $table = "valoracion_comentario_usuario";
 
 
-    private static function obtenerQuery($idValoracion, $idUsuario, $idComentario){
+    public static function obtenerQuery($idValoracion, $idUsuario, $idComentario){
         return self::where('idValoracion','=',$idValoracion)
                     ->where('idUsuario','=',$idUsuario)
                     ->where('idComentario','=',$idComentario);

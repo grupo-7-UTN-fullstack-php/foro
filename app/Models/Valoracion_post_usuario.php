@@ -14,7 +14,7 @@ class Valoracion_post_usuario extends ModeloBase
     protected $table = "valoracion_post_usuario";
 
 
-    private static function obtenerQuery($idValoracion, $idUsuario, $idPost){
+    public static function obtenerQuery($idValoracion, $idUsuario, $idPost){
         return self::where('idValoracion','=',$idValoracion)
             ->where('idUsuario','=',$idUsuario)
             ->where('idPost','=',$idPost);
@@ -23,6 +23,8 @@ class Valoracion_post_usuario extends ModeloBase
     public static function existe($valoracion){
         return self::obtenerQuery($valoracion->idValoracion, $valoracion->idUsuario, $valoracion->idPost)->exists();
     }
+
+
     public static function encontrar($valoracion){
         return self::obtenerQuery($valoracion->idValoracion, $valoracion->idUsuario, $valoracion->idPost)->first();
     }

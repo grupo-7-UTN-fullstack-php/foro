@@ -12,6 +12,20 @@ class Valoracion_comentario extends ModeloBase
     protected $table = "valoracion_comentario";
     protected $primaryKey = "idValoracion";
 
+    public static function obtenerCantidadTodasValoraciones($idComentario){
+
+        $respuesta = []; //array asociativo valoraciones["idComentario"] = cantidadValoraciones
+        $valoraciones =  self::where('idComentario','=',$idComentario)->select('idValoracion','cantidad')->get();
+
+        if(!empty($valoraciones)){
+            foreach($valoraciones as $valoracion){
+                //$respuesta[$valoracion->idValoracion] = (empty($valoracion->cantidad)) ? 0 : $valoracion->cantidad;
+                $respuesta[$valoracion->idValoracion] = $valoracion->cantidad;
+            }
+        }
+        return $respuesta;
+    }
+
     public static function obtenerCantidadValoraciones($idValoracion,$idComentario){
         $valoracion = self::select('cantidad')
                     ->where('idValoracion','=',$idValoracion)

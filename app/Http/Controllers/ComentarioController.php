@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comentario;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -63,6 +64,7 @@ class ComentarioController extends Controller
             $comentario->fill(array_merge($datosValidados, $datosPorDefecto));
 
             Comentario::crearComentario($comentario);
+            Post::incrementarCantidadComentariosPost(Post::obtenerPost($request->get("idPost")));
             return to_route('post.show', $request->get("idPost"));
         }
         else {

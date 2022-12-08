@@ -10,11 +10,18 @@
     <div class="bar">
         <div class="reactions">
             <div class="like reaction">
-                {!! file_get_contents(asset('svg/like.svg'))!!}
-                <div class="cantidad"></div>
+
+
+                @if(Auth::check() && $clase::obtenerQuery(1,Auth::id(),$id)->exists())
+                    {!! str_replace("<path",'<path class="svg-clicked"',str_replace("<svg",'<svg class="svg-clicked"',file_get_contents(asset('svg/like.svg'))))!!}
+                @else
+                    {!!file_get_contents(asset('svg/like.svg'))!!}
+                @endif
+                <div class="cantidad">{{(isset($publicacion->valoraciones["1"])) ? $publicacion->valoraciones["1"] : 0  }}</div>
             </div>
             <div
             @if(Auth::check())
+
                 @once
                     @push('comentario')
                         <form class="form-comentario row hidden" action="{{route('comentario.store', $id)}}" method="post">
@@ -71,6 +78,18 @@
                                     elementoJquery.find('.cantidad').html((cantidad==null || cantidad === undefined) ? 0 : cantidad);
                                 }
 
+                                function incrementarValoracion(reactionJQuery){
+                                    cantidadActual = parseInt(reactionJQuery.find('.cantidad').html(),10);
+                                    reactionJQuery.find('.cantidad').html(cantidadActual+1);
+                                }
+
+                                function decrementarValoracion(reactionJQuery){
+                                    cantidadActual = parseInt(reactionJQuery.find('.cantidad').html(),10);
+                                    reactionJQuery.find('.cantidad').html(cantidadActual-1);
+                                }
+
+
+
                                 function actualizarValoraciones(elementos){
                                     for(const e of elementos){
                                         const id = parseInt($( $(e).closest('.publicacion') ).attr('id-publicacion'), 10);
@@ -83,7 +102,6 @@
                                             success: function (response) {
                                                 //console.log("respuesta: "+response);
                                                 //alert(mensaje+" cantidad: "+response.toString());
-                                                actualizarValoracion($(e),response);
 
                                             }
                                         });
@@ -94,15 +112,27 @@
                                 }
 
 
-
                                 $(".like svg").click(function() {
                                     const id = parseInt($( $(this).closest('.publicacion') ).attr('id-publicacion'), 10);
                                     const publicacion = ($(this).parents('.comentario-wrapper').length == 0) ? 'post' : 'comentario';
-                                    const method = ($(this).children('.svg-clicked').length != 0) ? 'DELETE' : 'POST';
+                                    const parent = $($(this).parent());
+                                    let method;
+
+
+
+                                    if($(this).children('.svg-clicked').length != 0){
+                                        method = 'DELETE';
+                                        decrementarValoracion(parent);
+                                    }
+                                    else{
+                                        method = 'POST';
+                                        incrementarValoracion(parent)
+                                    }
+
                                     const idValoracion = 1;
                                     const url = urlValoracion(idValoracion,publicacion,id);
 
-                                    const parent = $($(this).parent());
+
 
                                     //const mensaje = method + " " + publicacion;
 
@@ -113,16 +143,11 @@
                                         success: function (response) {
                                             //console.log("respuesta: "+response);
                                             //alert(mensaje+" cantidad: "+response.toString());
-                                            actualizarValoracion(parent,response);
 
                                         }
                                     });
 
                                 });
-
-                                window.onload = function(){
-                                    actualizarValoraciones($('.like'));
-                                }
 
 
 
@@ -143,6 +168,8 @@
             class="comentar reaction text-center">
 
             {!! file_get_contents(asset('svg/comment.svg'))!!}
+
+            <div class="cantidad">{{(isset($publicacion->cant_comentarios)) ? $publicacion->cant_comentarios : 0 }}</div>
 
             </div>
 

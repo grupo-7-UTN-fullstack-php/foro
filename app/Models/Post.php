@@ -19,6 +19,7 @@ class Post extends ModeloBase
     protected int $idUsuario;
     protected string $usuario;
     protected int $idEstadoPublicacion;
+    public $valoraciones = null;
 
 
     /**
@@ -31,14 +32,23 @@ class Post extends ModeloBase
 
     public static function obtenerPost(int $id)
     {
-        return self::where('post.idPost', '=', $id)->
-        join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')->get()[0];
-
+        $post = self::where('post.idPost', '=', $id)->
+        join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')->first();
+        $post->valoraciones = Valoracion_post::obtenerCantidadTodasValoraciones($post->idPost);
+        return $post;
     }
 
     public static function obtenerTodosLosPosts()
     {
-        return self::join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')->get();
+
+        $posts = self::join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')->get();
+
+        foreach($posts as $post){
+            $post->valoraciones = Valoracion_post::obtenerCantidadTodasValoraciones($post->idPost);
+        }
+
+        return $posts;
+
     }
 
     public static function obtenerPostsDeUnUsuario(int $id)

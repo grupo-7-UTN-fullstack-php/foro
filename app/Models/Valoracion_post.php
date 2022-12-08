@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
+use mysql_xdevapi\Collection;
 
 class Valoracion_post extends ModeloBase
 {
@@ -12,6 +14,22 @@ class Valoracion_post extends ModeloBase
     protected $table = "valoracion_post";
     protected $primaryKey = "idValoracion";
     public $timestamps = false;
+
+
+    public static function obtenerCantidadTodasValoraciones($idPost){
+
+        $respuesta = []; //array asociativo valoraciones["idValoracion"] = cantidadValoraciones
+        $valoraciones =  self::where('idPost','=',$idPost)->select('idValoracion','cantidad')->get();
+
+
+        if(!empty($valoraciones)){
+            foreach($valoraciones as $valoracion){
+                //$respuesta[$valoracion->idValoracion] = (empty($valoracion->cantidad)) ? 0 : $valoracion->cantidad;
+                $respuesta[$valoracion->idValoracion] = $valoracion->cantidad;
+            }
+        }
+        return $respuesta;
+    }
 
     public static function obtenerCantidadValoraciones($idValoracion,$idPost): int{
         $valoracion = self::select('cantidad')

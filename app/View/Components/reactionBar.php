@@ -7,14 +7,18 @@ use Illuminate\View\Component;
 class reactionBar extends Component
 {
     public $id;
+    public $publicacion;
+    public $clase;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($id)
+    public function __construct($id, $publicacion, $clase)
     {
         $this->id = $id;
+        $this->publicacion = $publicacion;
+        $this->clase = $clase;
     }
 
     /**

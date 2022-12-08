@@ -7,5 +7,5 @@
             {{$comentario->contenido}}
         </div>
     </div>
-    <x-reaction-bar id="{{$comentario->idComentario}}"/>
+    <x-reaction-bar id="{{$comentario->idComentario}}" :publicacion="$comentario" :clase="\App\Models\Valoracion_comentario_usuario::class"/>
 </div>

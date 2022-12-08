@@ -20,7 +20,7 @@ function comentable() {
     return false;
 }
 
-$('*').filter(function () {
+$('*').not('svg, svg > *').filter(function () {
     return $(this).css('cursor') == 'pointer';
 }).click(function(){
    irAPost($(this));

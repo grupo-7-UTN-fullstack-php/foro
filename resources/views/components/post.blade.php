@@ -18,7 +18,7 @@
             <div class="overlay"></div>
         </div>
     </div>
-    <x-reaction-bar id="{{$post->idPost}}"/>
+    <x-reaction-bar id="{{$post->idPost}}" :publicacion="$post" :clase="\App\Models\Valoracion_post_usuario::class"/>
 
     <div>
 
