@@ -4,7 +4,6 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 class Post extends ModeloBase
@@ -25,7 +24,7 @@ class Post extends ModeloBase
     /**
      * @throws ValidationException
      */
-    public static function crearPost(Post $post): void
+    public static function guardarPost(Post $post): void
     {
         $post->save();
     }
@@ -43,7 +42,7 @@ class Post extends ModeloBase
 
         $posts = self::join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')->get();
 
-        foreach($posts as $post){
+        foreach ($posts as $post) {
             $post->valoraciones = Valoracion_post::obtenerCantidadTodasValoraciones($post->idPost);
         }
 
@@ -82,6 +81,8 @@ class Post extends ModeloBase
         $unPost->save();
 
     }
+
+
 
     protected $table = "post";
     protected $primaryKey = "idPost";

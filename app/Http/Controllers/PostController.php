@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Comentario;
 use App\Models\Post;
-use App\Models\Usuario;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -84,7 +83,7 @@ class PostController extends Controller
         $post = new Post();
         $post->fill(array_merge($datosValidados, $datosPorDefecto));
 
-        Post::crearPost($post);
+        Post::guardarPost($post);
         return to_route('post.index');
     }
 
@@ -96,18 +95,19 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        return view('posteos/post_show',["post"=>Post::obtenerPost($id),"comentarios"=>Comentario::obtenerTodosLosComentarios($id)]);
+        return view('posteos/post_show', ["post" => Post::obtenerPost($id), "comentarios" => Comentario::obtenerTodosLosComentarios($id)]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return Response
+     * @return Application|Factory|View
      */
-    public function edit($id)
+    public function edit($id): View|Factory|Application
     {
-        //
+        return view("posteos/post", ['titulo' => 'Editar post']);
+
     }
 
     /**
@@ -115,11 +115,33 @@ class PostController extends Controller
      *
      * @param Request $request
      * @param int $id
-     * @return Response
+     * @return RedirectResponse
+     * @throws ValidationException
      */
-    public function update(Request $request, $id):void
+    public function update(Request $request, int $id): RedirectResponse
     {
-        //
+        $reglas = [
+            'titulo' => ['required', 'min:2', 'max:45', 'unique:post'],
+            'contenido' => ['required', 'min:2,max:255'],
+
+        ];
+        $mensajes = [
+            'titulo' => 'algún mensaje a enviar',
+            'contenido' => 'superaste la cantidad de caracteres permitidos'
+        ];
+
+        Validator::make($request->all(), $reglas, $mensajes)->validate();
+        $datosValidados = $request->except(['_token']);//ver estos campos si es que se pasa alguno
+        $datosPorDefecto = [
+            'idUsuario' => Auth::id(),
+            'idEstadoPublicacion' => 1,
+            'activo' => true
+        ];
+        $post = Post::obtenerPost($id);
+        $post->fill(array_merge($datosValidados, $datosPorDefecto));
+
+        Post::guardarPost($post);
+        return to_route('post.index');
     }
 
     /**
@@ -128,7 +150,7 @@ class PostController extends Controller
      * @param int $id
      * @return Response
      */
-    public function destroy(int $id):void
+    public function destroy(int $id): void
     {
         Post::bajaLogicaPost($id);
     }
