@@ -21,9 +21,6 @@ class Comentario extends ModeloBase
     public static function crearComentario(Comentario $comentario): void
     {
         $comentario->save();
-
-
-
     }
     public static function obtenerTodosLosComentarios($idPost){
         $comentarios =  self::where('comentario.idPost', '=', $idPost)->

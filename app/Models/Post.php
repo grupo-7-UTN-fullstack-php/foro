@@ -26,13 +26,14 @@ class Post extends ModeloBase
      */
     public static function guardarPost(Post $post): void
     {
-        self::$post->save();
+        $post->save();
     }
 
     public static function obtenerPost($id)
     {
-        $post = self::where('post.idPost', '=', $id)->
-        join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')->first();
+//        $post = self::where('post.idPost', '=', $id)->
+//        join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')->first();
+        $post = self::findOrFail($id);
         $post->valoraciones = Valoracion_post::obtenerCantidadTodasValoraciones($post->idPost);
         return $post;
     }
@@ -76,14 +77,11 @@ class Post extends ModeloBase
 
     public static function bajaLogicaPost(int $id): void
     {
-        $unPost = self::find($id);
+        $unPost = self::findOrFail($id);
         $unPost->activo = false;
         $unPost->save();
 
     }
-
-
-
 
 
     use HasFactory;

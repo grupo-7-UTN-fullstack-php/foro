@@ -40,6 +40,7 @@ Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 Route::post('/logout', [LoginController::class, 'destroy'])->name('login.destroy')->middleware('auth');
 
 //Comentario
+
 Route::post('post/{id}', [ComentarioController::class, 'store'])->name('comentario.store')->middleware('auth');
 
 //Reacciones

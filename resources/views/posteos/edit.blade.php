@@ -10,6 +10,7 @@
     <div class="container">
         <form class="row g-3" action="{{route('post.update',$post->idPost)}}" method="post">
             @csrf
+            @method('PUT')
             <div class="mb-3">
                 <label for="titulo" class="form-label">Título</label>
                 <input type="text" class="form-control @error('titulo') is-invalid @enderror" name="titulo" id="titulo"

@@ -133,8 +133,13 @@ class PostController extends Controller
 
         Validator::make($request->all(), $reglas, $mensajes)->validate();
         $datosValidados = $request->except(['_token']);//ver estos campos si es que se pasa alguno
+        $datosPorDefecto = [
+            'idUsuario' => Auth::id(),
+            'idEstadoPublicacion' => 1,
+            'activo' => true
+        ];
         $post = Post::obtenerPost($id);
-        $post->fill(array_merge($datosValidados));
+        $post->fill(array_merge($datosValidados, $datosPorDefecto));
         Post::guardarPost($post);
         return to_route('post.index');
     }
