@@ -4,10 +4,13 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 use Illuminate\Validation\ValidationException;
 
 class Post extends ModeloBase
 {
+    use SoftDeletes;
     protected $guarded = [];
     protected string $titulo = "";
     protected string $contenido = "";
@@ -75,11 +78,12 @@ class Post extends ModeloBase
         $unPost->delete();
     }
 
-    public static function bajaLogicaPost(int $id): void
+    public static function bajaLogicaPost(int $id)
     {
-        $unPost = self::findOrFail($id);
+        $unPost = self::obtenerPost($id);
         $unPost->activo = false;
         $unPost->save();
+        $unPost->runSoftDelete();
 
     }
 

@@ -16,9 +16,11 @@
                 </a>
             </div>
             <div>
-                <a href="{{route('post.destroy',$post->idPost)}}" class="btn btn-danger btn-sm">
-                    eliminar
-                </a>
+                <form action="{{route('post.destroy', $post->idPost)}}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" class="btn btn-danger btn-sm" value="eliminar">
+                </form>
             </div>
         </div>
         <div class="contenido-wrapper">
