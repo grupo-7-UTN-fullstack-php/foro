@@ -9,16 +9,16 @@ use Illuminate\Validation\ValidationException;
 class Post extends ModeloBase
 {
     protected $guarded = [];
-
     protected string $titulo = "";
     protected string $contenido = "";
     protected int $activo;
-//    protected int $cant_comentarios;
     protected int $visitas;
     protected int $idUsuario;
     protected string $usuario;
     protected int $idEstadoPublicacion;
     public $valoraciones = null;
+    protected $table = "post";
+    protected $primaryKey = "idPost";
 
 
     /**
@@ -26,10 +26,10 @@ class Post extends ModeloBase
      */
     public static function guardarPost(Post $post): void
     {
-        $post->save();
+        self::$post->save();
     }
 
-    public static function obtenerPost(int $id)
+    public static function obtenerPost($id)
     {
         $post = self::where('post.idPost', '=', $id)->
         join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')->first();
@@ -84,8 +84,7 @@ class Post extends ModeloBase
 
 
 
-    protected $table = "post";
-    protected $primaryKey = "idPost";
+
 
     use HasFactory;
 }

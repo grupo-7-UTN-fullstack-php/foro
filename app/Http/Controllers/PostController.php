@@ -104,10 +104,11 @@ class PostController extends Controller
      * @param int $id
      * @return Application|Factory|View
      */
-    public function edit($id): View|Factory|Application
+    public function edit($id)
     {
-        return view("posteos/post", ['titulo' => 'Editar post']);
-
+        $post = Post::obtenerPost($id);
+//        return $post;
+        return view("posteos/edit", ['titulo' => 'Editar post'], compact('post'));
     }
 
     /**
@@ -132,14 +133,8 @@ class PostController extends Controller
 
         Validator::make($request->all(), $reglas, $mensajes)->validate();
         $datosValidados = $request->except(['_token']);//ver estos campos si es que se pasa alguno
-        $datosPorDefecto = [
-            'idUsuario' => Auth::id(),
-            'idEstadoPublicacion' => 1,
-            'activo' => true
-        ];
         $post = Post::obtenerPost($id);
-        $post->fill(array_merge($datosValidados, $datosPorDefecto));
-
+        $post->fill(array_merge($datosValidados));
         Post::guardarPost($post);
         return to_route('post.index');
     }

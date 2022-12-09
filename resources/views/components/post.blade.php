@@ -10,6 +10,16 @@
             <div class="autor">
                 by <span><a href="{{route('usuarios.show', ['username' => $post->usuario])}}">{{$post->usuario}}</a></span>
             </div>
+            <div>
+                <a href="{{route('post.edit',$post->idPost)}}" class="btn btn-warning btn-sm">
+                    editar
+                </a>
+            </div>
+            <div>
+                <a href="{{route('post.destroy',$post->idPost)}}" class="btn btn-danger btn-sm">
+                    eliminar
+                </a>
+            </div>
         </div>
         <div class="contenido-wrapper">
             <div class="contenido d-flex flex-column px-4 overflow-auto align-items-stretch">
