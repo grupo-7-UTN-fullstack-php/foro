@@ -81,10 +81,17 @@ class Post extends ModeloBase
     public static function bajaLogicaPost(int $id)
     {
         $unPost = self::obtenerPost($id);
+        $unPost->runSoftDelete();
         $unPost->activo = false;
         $unPost->save();
-        $unPost->runSoftDelete();
 
+    }
+    public static function altaLogicaPost(int $id)
+    {
+        $unPost = self::obtenerPost($id);
+        $unPost->restore();
+        $unPost->activo = true;
+        $unPost->save();
     }
 
 

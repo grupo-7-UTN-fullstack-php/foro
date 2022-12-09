@@ -152,5 +152,11 @@ class PostController extends Controller
     public function destroy(int $id)
     {
         Post::bajaLogicaPost($id);
+        return back()->with('notification', 'post eliminado correctamente.');
+    }
+    public function restore(int $id)
+    {
+        Post::altaLogicaPost($id);
+        return back()->with('notification', 'post recuperado correctamente.');
     }
 }
