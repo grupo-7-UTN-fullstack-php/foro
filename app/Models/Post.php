@@ -5,12 +5,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 use Illuminate\Validation\ValidationException;
 
 class Post extends ModeloBase
 {
     use SoftDeletes;
+
     protected $guarded = [];
     protected string $titulo = "";
     protected string $contenido = "";
@@ -20,6 +20,7 @@ class Post extends ModeloBase
     protected string $usuario;
     protected int $idEstadoPublicacion;
     public $valoraciones = null;
+    public string $imagen = "";
     protected $table = "post";
     protected $primaryKey = "idPost";
 
@@ -36,12 +37,13 @@ class Post extends ModeloBase
     {
 //        $post = self::where('post.idPost', '=', $id)->
 //        join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')->first();
-        $post = self::where('post.idPost',$id)
-                        ->join('usuario','usuario.idUsuario','=','post.idUsuario')
-                        ->first();
+        $post = self::where('post.idPost', $id)
+            ->join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')
+            ->first();
         $post->valoraciones = Valoracion_post::obtenerCantidadTodasValoraciones($post->idPost);
         return $post;
     }
+
     public static function obtenerTodosLosPosts()
     {
 
@@ -87,6 +89,7 @@ class Post extends ModeloBase
         $unPost->save();
 
     }
+
     public static function altaLogicaPost(int $id)
     {
         $unPost = self::obtenerPost($id);

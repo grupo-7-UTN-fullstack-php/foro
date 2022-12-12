@@ -29,7 +29,7 @@
             </div>
             <div>
                 <label for="">Imágen</label>
-                <input type="file" name="imagen">
+                <input type="file" name="imagen" accept="images/*">
             </div>
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Crear post</button>
