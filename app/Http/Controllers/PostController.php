@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
@@ -81,6 +82,12 @@ class PostController extends Controller
             'activo' => true
         ];
         $post = new Post();
+        if ($request->hasFile("imagen")){
+            $imagen = $request->file("imagen");
+            $nombreImagen = Str::slug($request->titulo).".".$imagen->guessExtension();
+            $ruta = public_path("./images/post/");
+            copy($imagen->getRealPath(),$ruta.$nombreImagen);
+        }
         $post->fill(array_merge($datosValidados, $datosPorDefecto));
 
         Post::guardarPost($post);

@@ -8,7 +8,7 @@
         <H1>{{$titulo}}</H1>
     </header>
     <div class="container">
-        <form class="row g-3" action="{{route('post.store')}}" method="post">
+        <form class="row g-3" action="{{route('post.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="titulo" class="form-label">Título</label>
@@ -26,6 +26,10 @@
                 @error('textarea')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
+            </div>
+            <div>
+                <label for="">Imágen</label>
+                <input type="file" name="imagen">
             </div>
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Crear post</button>
