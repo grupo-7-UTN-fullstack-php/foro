@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Validation\ValidationException;
 
+
 class Post extends ModeloBase
 {
     use SoftDeletes;
@@ -20,9 +21,10 @@ class Post extends ModeloBase
     protected string $usuario;
     protected int $idEstadoPublicacion;
     public $valoraciones = null;
-    public string $imagen = "";
+//    public string $imagen = "";
     protected $table = "post";
     protected $primaryKey = "idPost";
+//    protected $fillable=['imagen'];
 
 
     /**
@@ -30,7 +32,9 @@ class Post extends ModeloBase
      */
     public static function guardarPost(Post $post): void
     {
+
         $post->save();
+//        dd($post->imagen);
     }
 
     public static function obtenerPost($id)

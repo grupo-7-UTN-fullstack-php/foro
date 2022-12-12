@@ -11,7 +11,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
@@ -66,13 +65,12 @@ class PostController extends Controller
         $reglas = [
             'titulo' => ['required', 'min:2', 'max:45', 'unique:post'],
             'contenido' => ['required', 'min:2,max:255'],
-            'imagen' => ['image'],
-
+            'imagen' => ['image']
         ];
         $mensajes = [
             'titulo' => 'mínimo 2 caracteres, máximo 45 o titulo repetido.',
             'contenido' => 'superaste la cantidad de caracteres permitidos.',
-            'imagen' =>'ingrese una imágen válida.'
+            'imagen' => 'ingrese una imágen válida.'
         ];
 
         Validator::make($request->all(), $reglas, $mensajes)->validate();
@@ -80,20 +78,16 @@ class PostController extends Controller
         $datosPorDefecto = [
             'idUsuario' => Auth::id(),
             'idEstadoPublicacion' => 1,
-            'activo' => true
+            'activo' => true,
         ];
         $post = new Post();
+        $imagen = $request->file("imagen");
         if ($request->hasFile("imagen")) {
-            $imagen = $request->file("imagen");
-            $nombreImagen = Str::slug($request->titulo) . "." . $imagen->guessExtension();
-            $ruta = public_path("images/post/");
-            copy($imagen->getRealPath(), 'images/post/' . $nombreImagen);
-            $post->imagen = $nombreImagen;
-//            dd('images/post/'. $nombreImagen);
-
+            $imagen->move(public_path('images/post'), $imagen->getClientOriginalName());
+            $post->imagen = $imagen->getClientOriginalName();
         }
-        $post->fill(array_merge($datosValidados, $datosPorDefecto));
 
+        $post->fill(array_merge($datosValidados, $datosPorDefecto));
         Post::guardarPost($post);
         return to_route('post.index');
     }
