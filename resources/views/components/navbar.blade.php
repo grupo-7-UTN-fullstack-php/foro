@@ -13,7 +13,9 @@
                         <div class="navbar-nav justify-content-start">
                             <a class="nav-item nav-link" href="{{route('post.index')}}">Mis posts</a>
                             <a class="nav-item nav-link" href="{{route('post.create')}}">Postear</a>
+                            @can('admin')
                             <a class="nav-item nav-link" href="{{route('usuarios.index')}}">Usuarios</a>
+                            @endcan
                         </div>
                     </div>
                 </div>

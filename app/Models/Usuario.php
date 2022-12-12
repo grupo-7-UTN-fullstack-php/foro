@@ -27,16 +27,6 @@ class Usuario extends Authenticatable
     ];
     protected $table = "usuario";
     protected $primaryKey = "idUsuario";
-    protected $usuario;
-    protected string $nombre;
-    protected string $apellido;
-    protected string $email;
-    protected Date $fecha_nacimiento;
-    protected string $idRol;
-    protected string $idEstado;
-    protected string $activo;
-    protected Date $updated_at;
-    protected Date $created_at;
 
     public static function encontrarPorUsername($username){
         $usuario = self::where('usuario.usuario', '=', $username)->get();
@@ -85,4 +75,14 @@ class Usuario extends Authenticatable
         global $table;
         return Schema::getColumnListing("usuario");
     }
+
+    public static function esMod($id){
+        return self::find($id)->idRol == 2;
+    }
+
+    public static function esAdmin($id){
+        return self::find($id)->idRol == 3;
+    }
+
+
 }

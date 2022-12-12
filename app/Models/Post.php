@@ -42,7 +42,6 @@ class Post extends ModeloBase
         $post->valoraciones = Valoracion_post::obtenerCantidadTodasValoraciones($post->idPost);
         return $post;
     }
-
     public static function obtenerTodosLosPosts()
     {
 

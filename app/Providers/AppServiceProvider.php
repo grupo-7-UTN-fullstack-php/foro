@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -28,5 +29,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('esta_logueado',function(){
             return Auth::check();
         });
+
     }
 }
