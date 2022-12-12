@@ -36,7 +36,9 @@ class Post extends ModeloBase
     {
 //        $post = self::where('post.idPost', '=', $id)->
 //        join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')->first();
-        $post = self::findOrFail($id);
+        $post = self::where('post.idPost',$id)
+                        ->join('usuario','usuario.idUsuario','=','post.idUsuario')
+                        ->first();
         $post->valoraciones = Valoracion_post::obtenerCantidadTodasValoraciones($post->idPost);
         return $post;
     }
