@@ -21,23 +21,25 @@
                 </div>
 
             </div>
-            <div class="d-flex justify-content-end">
+            @if(Auth::check() and Auth::id() == $post->idUsuario)
+                <div class="d-flex justify-content-end">
 
-                <button type="button" class="btn dropdown-toggle edicion align-self-start" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button type="button" class="btn dropdown-toggle edicion align-self-start" data-bs-toggle="dropdown" aria-expanded="false">
 
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a href="{{route('post.edit',$post->idPost)}}" class="dropdown-item">
-                            Editar
-                        </a></li>
-                    <li><form action="{{route('post.destroy', $post->idPost)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="dropdown-item">Eliminar</button>
-                        </form></li>
-                </ul>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a href="{{route('post.edit',$post->idPost)}}" class="dropdown-item">
+                                Editar
+                            </a></li>
+                        <li><form action="{{route('post.destroy', $post->idPost)}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="dropdown-item">Eliminar</button>
+                            </form></li>
+                    </ul>
 
-            </div>
+                </div>
+            @endif
         </div>
         <div class="contenido-wrapper">
             <div class="contenido d-flex flex-column px-4 overflow-auto align-items-stretch">
