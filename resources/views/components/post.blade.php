@@ -1,6 +1,9 @@
 @prepend('styles')
     <link rel="stylesheet" href="{{asset('css/components/post.css')}}" type="text/css">
 @endprepend
+@prepend('scripts')
+    {{----}}<script src="{{asset('js/post.js')}}"></script>
+@endprepend
 <div id-publicacion="{{$post->idPost}}" class="publicacion post-wrapper">
 
     <div class="post flex-column">
