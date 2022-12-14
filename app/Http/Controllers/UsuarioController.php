@@ -30,7 +30,7 @@ class UsuarioController extends Controller
     {
         return view("index", [
             'campos' => Usuario::getColumns(),
-            'elementos' => Usuario::all()
+            'elementos' => Usuario::all('idUsuario', 'usuario', 'nombre', 'apellido', 'email', 'fecha_nacimiento')
         ]);
     }
 
