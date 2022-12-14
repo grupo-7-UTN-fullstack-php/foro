@@ -37,6 +37,22 @@
                         @php
                             $username = \App\Models\Usuario::encontrarUsername(\Illuminate\Support\Facades\Auth::id())->usuario;
                         @endphp
+                    <div  class="btn-group">
+
+                        <div class="d-inline-flex align-content-center notificacion">
+                            {!! file_get_contents(asset('svg/bell.svg'))!!}
+                            <ul class="dropdown-menu">
+
+                                <li><a class="dropdown-item" href="#">Menu item</a></li>
+                                <li><a class="dropdown-item" href="#">Menu item</a></li>
+                                <li><a class="dropdown-item" href="#">Menu item</a></li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{{$username}}  </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -50,6 +66,7 @@
                                         </form></li>
                             </ul>
                         </li>
+
 
                     @else
                         <a class="nav-item btn btn-primary me-3" href="{{route('login.create')}}">Iniciar
@@ -67,3 +84,6 @@
         </div>
     </div>
 </nav>
+@push('scripts')
+    <script src="{{asset('js/navbar.js')}}"></script>
+@endpush

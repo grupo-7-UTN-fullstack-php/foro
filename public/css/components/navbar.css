@@ -5,3 +5,19 @@
     position: sticky;
     top: 0;
 }
+.notificacion svg{
+    width: 20px;
+    align-self: center;
+    margin: 3px;
+    fill: #6b7280;
+    fill-opacity: 100%;
+    border-style: none;
+}
+.notificacion svg:hover{
+    fill-opacity: 75%;
+    cursor: pointer;
+}
+.notificacion svg .svg-clicked{
+    fill: royalblue;
+}
+

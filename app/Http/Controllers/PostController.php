@@ -127,7 +127,7 @@ class PostController extends Controller
     public function update(Request $request, int $id): RedirectResponse
     {
         $reglas = [
-            'titulo' => ['required', 'min:2', 'max:45', 'unique:post'],
+            'titulo' => ['required', 'min:2', 'max:45'],
             'contenido' => ['required', 'min:2,max:255'],
 
         ];
