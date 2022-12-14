@@ -48,6 +48,11 @@ class Post extends ModeloBase
         return $post;
     }
 
+    public static function obtenerUsuarioCreador($id)
+    {
+        return self::obtenerPost($id)->idUsuario;
+    }
+
     public static function obtenerTodosLosPosts()
     {
 
