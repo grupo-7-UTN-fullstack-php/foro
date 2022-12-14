@@ -29,7 +29,8 @@ class Usuario extends Authenticatable
     protected $primaryKey = "idUsuario";
 
     public static function encontrarPorUsername($username){
-        $usuario = self::where('usuario.usuario', '=', $username)->get();
+        $usuario = self::where('usuario.usuario', '=', $username)->join('rol','usuario.idRol','=','usuario.idRol')->
+        join('estado_usuario','usuario.idEstado','=','estado_usuario.idEstado')->get();
         return ($usuario->isEmpty()) ? null : $usuario[0];
     }
     public static function encontrarUsername($id){
