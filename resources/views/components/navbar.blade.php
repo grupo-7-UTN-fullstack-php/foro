@@ -32,22 +32,36 @@
             </div>
             <div class="container pe-0">
                 <div class="navbar-nav justify-content-end">
+
                     @if(\Illuminate\Support\Facades\Auth::check())
-                        <div>
-                            <a class="nav-item nav-link" href="{{route('usuarios.show',['username'=> \App\Models\Usuario::encontrarUsername(\Illuminate\Support\Facades\Auth::id())->usuario  ] )}}">Ver perfil</a>
+                        @php
+                            $username = \App\Models\Usuario::encontrarUsername(\Illuminate\Support\Facades\Auth::id())->usuario;
+                        @endphp
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{{$username}}  </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item"
+                                       href="{{route('usuarios.show',['username'=> $username ] )}}">
+                                        Ver perfil</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><form class="logout" method="post" action="{{route('login.destroy')}}">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item">Cerrar Sesión</button>
+                                        </form></li>
+                            </ul>
+                        </li>
 
-                        </div>
-
-                        <form class="logout" method="post" action="{{route('login.destroy')}}">
-                            @csrf
-                            <button type="submit" class="nav-item btn btn-primary">Cerrar Sesión</button>
-                        </form>
                     @else
                         <a class="nav-item btn btn-primary me-3" href="{{route('login.create')}}">Iniciar
                             Sesión</a>
                         <a class="nav-item btn btn-outline-primary"
                            href="{{route('usuarios.create')}}">Registrarse</a>
                     @endif
+
+
+
+
+
                 </div>
             </div>
         </div>

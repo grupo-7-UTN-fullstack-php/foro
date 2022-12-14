@@ -12,6 +12,8 @@ import 'bootstrap';
 import axios from 'axios';
 window.axios = axios;
 
+window.Popper = require('@popperjs/core');
+
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**

@@ -2,25 +2,41 @@
     <link rel="stylesheet" href="{{asset('css/components/post.css')}}" type="text/css">
 @endprepend
 <div id-publicacion="{{$post->idPost}}" class="publicacion post-wrapper">
+
     <div class="post flex-column">
-        <div class="header d-inline-flex flex-row mx-0 px-4 align-items-baseline">
-            <div class="titulo">
-                {{$post->titulo}}
+        <div class="d-flex align-content-end">
+
+            <div class="header d-inline-flex flex-row mx-0 px-4 align-items-baseline">
+                <div class="titulo">
+                    {{$post->titulo}}
+                </div>
+                <div class="autor">
+                    by <span><a href="{{route('usuarios.show', ['username' => $post->usuario])}}">{{$post->usuario}}</a></span>
+                </div>
+                <div>
+
+                </div>
+                <div>
+
+                </div>
+
             </div>
-            <div class="autor">
-                by <span><a href="{{route('usuarios.show', ['username' => $post->usuario])}}">{{$post->usuario}}</a></span>
-            </div>
-            <div>
-                <a href="{{route('post.edit',$post->idPost)}}" class="btn btn-warning btn-sm">
-                    editar
-                </a>
-            </div>
-            <div>
-                <form action="{{route('post.destroy', $post->idPost)}}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" class="btn btn-danger btn-sm" value="eliminar">
-                </form>
+            <div class="d-flex justify-content-end">
+
+                <button type="button" class="btn dropdown-toggle edicion align-self-start" data-bs-toggle="dropdown" aria-expanded="false">
+
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a href="{{route('post.edit',$post->idPost)}}" class="dropdown-item">
+                            Editar
+                        </a></li>
+                    <li><form action="{{route('post.destroy', $post->idPost)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="dropdown-item">Eliminar</button>
+                        </form></li>
+                </ul>
+
             </div>
         </div>
         <div class="contenido-wrapper">
