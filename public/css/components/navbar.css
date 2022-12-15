@@ -17,7 +17,7 @@
     fill-opacity: 75%;
     cursor: pointer;
 }
-.notificacion svg .svg-clicked{
+.notificacion > *[aria-expanded="true"]{
     fill: royalblue;
 }
 

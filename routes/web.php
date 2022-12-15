@@ -52,5 +52,8 @@ Route::get('valoracion/{idValoracion}/comentario/{idComentario}',[ValoracionCont
 Route::post('valoracion/{idValoracion}/comentario/{idComentario}',[ValoracionController::class,'guardarValoracionComentario'])->name('valoracionComentario.guardar')->middleware('auth');
 Route::delete('valoracion/{idValoracion}/comentario/{idComentario}',[ValoracionController::class,'eliminarValoracionComentario'])->name('valoracionComentario.eliminar')->middleware('auth');
 
+Route::get('/texteditor',function () {
+    return view('editor');})->name('texteditor');
+
 //Perfil
 //Route::resource('perfil', PerfilController::class)->middleware('auth');
