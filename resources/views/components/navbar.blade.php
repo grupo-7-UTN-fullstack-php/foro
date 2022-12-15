@@ -39,13 +39,13 @@
                         @endphp
                     <div  class="btn-group">
 
-                        <div class="d-inline-flex align-content-center notificacion">
+                        <div class="d-inline-flex align-content-center notificacion-svg">
                             {!! file_get_contents(asset('svg/bell.svg'))!!}
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                @foreach(\App\Models\Notificacion::obtenerNotificacionesDeUsuario(Auth::id()) as $notificacion)
+                                    <li><a class="dropdown-item" href="#"><x-notificacion :notificacion="$notificacion"/></a></li>
+                                @endforeach
 
-                                <li><a class="dropdown-item" href="#">Menu item</a></li>
-                                <li><a class="dropdown-item" href="#">Menu item</a></li>
-                                <li><a class="dropdown-item" href="#">Menu item</a></li>
                             </ul>
                         </div>
 

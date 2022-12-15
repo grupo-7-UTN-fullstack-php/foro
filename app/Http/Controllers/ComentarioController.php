@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comentario;
+use App\Models\Notificacion;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,8 +64,19 @@ class ComentarioController extends Controller
             $comentario = new Comentario();
             $comentario->fill(array_merge($datosValidados, $datosPorDefecto));
 
+            $postAsociado = Post::obtenerPost($request->get("idPost"));
+
             Comentario::crearComentario($comentario);
-            Post::incrementarCantidadComentariosPost(Post::obtenerPost($request->get("idPost")));
+            Post::incrementarCantidadComentariosPost($postAsociado);
+
+            $notificacion = new Notificacion();
+            $notificacion->titulo = 'Tu post "'.$postAsociado->titulo.'" ha recibido un comentario';
+            $notificacion->descripcion = '@'.Auth::user()->usuario.' ha comentado "'.$comentario->contenido.'". Haz click para ver';
+            $notificacion->idUsuario = $postAsociado->idUsuario;
+            $notificacion->guardar();
+            $notificacion->asociarPost($postAsociado->idPost);
+
+
             return to_route('post.show', $request->get("idPost"));
         }
         else {

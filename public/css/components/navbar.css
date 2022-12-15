@@ -5,7 +5,7 @@
     position: sticky;
     top: 0;
 }
-.notificacion svg{
+.notificacion-svg svg{
     width: 20px;
     align-self: center;
     margin: 3px;
@@ -13,11 +13,14 @@
     fill-opacity: 100%;
     border-style: none;
 }
-.notificacion svg:hover{
+.notificacion-svg svg:hover{
     fill-opacity: 75%;
     cursor: pointer;
 }
-.notificacion > *[aria-expanded="true"]{
+.notificacion-svg > *[aria-expanded="true"]{
     fill: royalblue;
+}
+.notificacion-svg > .dropdown-menu{
+    max-width: 300px;
 }
 
