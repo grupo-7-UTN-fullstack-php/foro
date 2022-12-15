@@ -12,7 +12,8 @@
 @section('contenido')
     <div class="container-fluid">
         <div class="table-responsive">
-            <table class="table tabla table-sm w-auto table-striped table-bordered">
+            <table class="table caption-top table-sm w-auto table-striped table-bordered table-hover border-dark">
+                <caption class="">Listado de usuarios</caption>
                 <thead>
                 <tr>
                     @foreach($campos as $campo)

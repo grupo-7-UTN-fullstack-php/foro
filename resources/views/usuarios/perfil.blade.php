@@ -32,16 +32,16 @@
                         </div>
                         <div class="container-fluid">
                             <h4>Rol:</h4>
-                            <div>{{$usuario->idRol}}</div>
+                            <div>{{$usuario->descripcionRol}}</div>
                         </div>
                         <div class="container-fluid">
                             <h4>Estado:</h4>
-                            <div>{{$usuario->idEstado}}</div>
+                            <div>{{$usuario->descripcionEstado}}</div>
                         </div>
-                        <div class="container-fluid">
-                            <h4>Activo:</h4>
-                            <div>{{$usuario->activo}}</div>
-                        </div>
+{{--                        <div class="container-fluid">--}}
+{{--                            <h4>Activo:</h4>--}}
+{{--                            <div>{{$usuario->activo}}</div>--}}
+{{--                        </div>--}}
                         <div class="container-fluid">
                             <h4>Se unió en:</h4>
                             <div>{{$usuario->created_at}}</div>

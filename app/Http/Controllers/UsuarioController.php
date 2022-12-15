@@ -28,9 +28,10 @@ class UsuarioController extends Controller
 
     public function index()
     {
+        $campos = array_slice(Usuario::getColumns(), 0, 5);//esto resuelve pero no es lo ideal
         return view("index", [
-            'campos' => Usuario::getColumns(),
-            'elementos' => Usuario::all()
+            'campos' => $campos,
+            'elementos' => Usuario::all('idUsuario', 'usuario', 'nombre', 'apellido', 'email', 'fecha_nacimiento')
         ]);
     }
 
