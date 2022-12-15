@@ -75,23 +75,28 @@ class PostController extends Controller
 
         Validator::make($request->all(), $reglas, $mensajes)->validate();
         $datosValidados = $request->except(['_token']);//ver estos campos si es que se pasa alguno
+
+        $post = new Post();
+        $path="";
+        if ($request->hasFile("imagen")) {
+            $extension = $request->file('imagen')->getClientOriginalExtension();
+            $path = $request->file('imagen')->
+            storeAs('/public/images/post',
+                uniqid('', true) .
+                uniqid('', true) . $extension,
+                'local'
+            );
+        }
         $datosPorDefecto = [
             'idUsuario' => Auth::id(),
             'idEstadoPublicacion' => 1,
             'activo' => true,
+            'imagen' => $path
         ];
-        $post = new Post();
-        $imagen = $request->file("imagen");
-        if ($request->hasFile("imagen")) {
-            $imagen->move(public_path('images/post'), $imagen->getClientOriginalName());
-            $post->imagen = $imagen->getClientOriginalName();
-        }
-
         $post->fill(array_merge($datosValidados, $datosPorDefecto));
         Post::guardarPost($post);
         return to_route('post.index');
     }
-
     /**
      * Display the specified resource.
      *
