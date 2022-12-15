@@ -37,6 +37,14 @@ class Valoracion_comentario_usuario extends ModeloBase
     public static function agregarValoracion($valoracion){
         Valoracion_comentario::agregarValoracion($valoracion->idValoracion, $valoracion->idComentario);
         $valoracion->save();
+        $comentario = Comentario::obtenerComentario($valoracion->idComentario);
+        $notificacion = new Notificacion();
+        $notificacion->titulo = 'A @'.Auth::user()->usuario.' le ha gustado tu comentario';
+        $notificacion->descripcion = Auth::user()->usuario.' ha reaccionado a tu comentario al post "'.Post::obtenerPost($comentario->idPost)->titulo.'"';
+        $notificacion->idUsuario = $comentario->idUsuario;
+        $notificacion->guardar();
+        $notificacion->asociarComentario($comentario->idComentario);
+
     }
     public static function eliminar($valoracion){
         self::obtenerQuery($valoracion->idValoracion, $valoracion->idUsuario, $valoracion->idComentario)->delete();

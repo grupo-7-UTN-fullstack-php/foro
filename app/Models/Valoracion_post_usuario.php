@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Valoracion_post_usuario extends ModeloBase
 {
@@ -41,6 +42,13 @@ class Valoracion_post_usuario extends ModeloBase
     public static function agregarValoracion($valoracion){
         Valoracion_post::agregarValoracion($valoracion->idValoracion, $valoracion->idPost);
         $valoracion->save();
+        $post = Post::obtenerPost($valoracion->idPost);
+        $notificacion = new Notificacion();
+        $notificacion->titulo = 'A @'.Auth::user()->usuario.' le ha gustado tu post';
+        $notificacion->descripcion = 'A @'.Auth::user()->usuario.' ha reaccionado a "'.$post->titulo.'"';
+        $notificacion->idUsuario = $post->idUsuario;
+        $notificacion->guardar();
+        $notificacion->asociarPost($post->idPost);
     }
 
     public static function eliminar($valoracion){

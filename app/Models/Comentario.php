@@ -33,5 +33,8 @@ class Comentario extends ModeloBase
         return $comentarios;
 
     }
+    public static function obtenerComentario($id){
+        return self::find($id);
+    }
 
 }

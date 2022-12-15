@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notificacion;
 use App\Models\Valoracion_comentario;
 use App\Models\Valoracion_comentario_usuario;
 use App\Models\Valoracion_post;
@@ -43,6 +44,14 @@ class ValoracionController extends Controller
 
         if(! $clase::existe($valoracion))
             $clase::agregarValoracion($valoracion);
+
+
+        if($publicacion == 'post'){
+
+        }
+        else{
+
+        }
 
         return self::cantidadValoracion($request->input('idValoracion'), $publicacion, $request->input('id'));
 
