@@ -79,7 +79,7 @@ class PostController extends Controller
         $post = new Post();
         $path="";
         if ($request->hasFile("imagen")) {
-            $extension = $request->file('imagen')->getClientOriginalExtension();
+            $extension ='.' . $request->file('imagen')->getClientOriginalExtension();
             $path = $request->file('imagen')->
             storeAs('/public/images/post',
                 uniqid('', true) .
