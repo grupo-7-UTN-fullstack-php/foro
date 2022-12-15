@@ -33,7 +33,7 @@ class Post extends ModeloBase
     public static function guardarPost(Post $post): void
     {
         $post->save();
-        dd($post->imagen);
+//        dd($post->imagen);
     }
 
     public static function obtenerPost($id)
