@@ -82,6 +82,13 @@
     margin:0;
     background-size: contain;
 }
+.modal-header h6{
+    font-size: 1.2rem;
+}
 .modal-body label{
     margin:0;
+}
+
+#reporte-motivos{
+    font-size: 0.9rem;
 }

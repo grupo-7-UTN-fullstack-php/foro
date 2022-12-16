@@ -55,5 +55,8 @@ Route::delete('valoracion/{idValoracion}/comentario/{idComentario}',[ValoracionC
 Route::get('/texteditor',function () {
     return view('editor');})->name('texteditor');
 
+//Reportes
+Route::post('/reportar',[\App\Http\Controllers\ReporteController::class,'store'])->middleware('auth')->name('reportar');
+Route::get('/misReportes',\App\Http\Controllers\ReporteController::class,'mostrarReportesDelUsuario')->name('misReportes');
 //Perfil
 //Route::resource('perfil', PerfilController::class)->middleware('auth');

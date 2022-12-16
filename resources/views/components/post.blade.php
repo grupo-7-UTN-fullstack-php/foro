@@ -13,7 +13,7 @@
                 <div class="titulo">
                     {{$post->titulo}}
                 </div>
-                <div class="autor">
+                <div idAutor="{{$post->idUsuario}}" class="autor">
                     by <span><a href="{{route('usuarios.show', ['username' => $post->usuario])}}">{{$post->usuario}}</a></span>
                 </div>
                 <div>
