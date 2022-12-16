@@ -45,14 +45,6 @@ class ValoracionController extends Controller
         if(! $clase::existe($valoracion))
             $clase::agregarValoracion($valoracion);
 
-
-        if($publicacion == 'post'){
-
-        }
-        else{
-
-        }
-
         return self::cantidadValoracion($request->input('idValoracion'), $publicacion, $request->input('id'));
 
     }

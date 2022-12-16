@@ -28,6 +28,7 @@
     margin: auto;
     display: block;
     cursor: pointer;
+    fill-rule: evenodd;
 }
 
 
@@ -65,10 +66,22 @@
 .area-comentario{
     height: 12rem;
 }
-.comentario-submit{
+.comentario-submit {
     display: flex;
     width: 10%;
     text-align: center;
     justify-content: center;
     margin: 2rem 0 0 0;
+}
+.modal-body{
+    text-align: start;
+}
+.modal-header .btn-close{
+    height: 0.3rem;
+    width: 0.3rem;
+    margin:0;
+    background-size: contain;
+}
+.modal-body label{
+    margin:0;
 }

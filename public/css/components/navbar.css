@@ -3,6 +3,7 @@
 }
 .navbar{
     position: sticky;
+    z-index: 1000;
     top: 0;
 }
 .notificacion-svg svg{

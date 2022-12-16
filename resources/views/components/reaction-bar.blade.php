@@ -5,6 +5,36 @@
 @prepend('scripts')
     <script src="{{asset('js/reaction-bar.js')}}"></script>
 @endprepend
+
+@if(Auth::check())
+        <!-- Reportar -->
+        <div class="modal fade" id="reporte" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Reportar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form class="form-reporte" action="{{route('comentario.store', $id)}}" method="post">
+                        @csrf
+                        <div class="modal-body justify-content-start">
+                            <label for="reporte-motivo" class="comentario-label">Motivo:</label>
+                            <input type="text" class="motivo-reporte form-control"
+                                   id="reporte-motivo" name="reporte-motivo" placeholder="Motivo" minlength="10" required></input>
+                            <label for="reporte-contenido" class="comentario-label">Explicación:</label>
+                            <textarea class="area-reporte form-control"
+                                      id="reporte-contenido" name="reporte-contenido" placeholder="¿Por qué consideras necesario este reporte?" minlength="10" required></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Reportar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+@endif
+
 @endonce
 <div class="bar-wrapper container-fluid">
     <div class="bar">
@@ -13,7 +43,10 @@
 
 
                 @if(Auth::check() && $clase::obtenerQuery(1,Auth::id(),$id)->exists())
-                    {!! str_replace("<path",'<path class="svg-clicked"',str_replace("<svg",'<svg class="svg-clicked"',file_get_contents(asset('svg/like.svg'))))!!}
+                    {!! str_replace("<path",'<path class="svg-clicked"',
+                        str_replace("<svg",'<svg class="svg-clicked"',
+                        str_replace("<style",'<style class="svg-clicked"',
+                        file_get_contents(asset('svg/like.svg')))))!!}
                 @else
                     {!!file_get_contents(asset('svg/like.svg'))!!}
                 @endif
@@ -53,27 +86,6 @@
                                         .replace("_idPublicacion",idPublicacion);
                                 }
 
-                                function ajaxRequest(method,url,data,mensaje){
-
-                                    $.ajax({
-                                        type: method,
-                                        url: url,
-                                        data: data,
-                                        success: function (response) {
-                                            //alert(mensaje+" cantidad: "+response.toString());
-                                            actualizarRespuesta(response);
-                                        }
-                                    });
-
-                                }
-
-                                function xd(elementos, cantidad){
-
-                                    for(const e of elementos){
-                                        actualizarValoracion($(e),cantidad);
-                                    }
-                                }
-
                                 function actualizarValoracion(elementoJquery, cantidad){
                                     elementoJquery.find('.cantidad').html((cantidad==null || cantidad === undefined) ? 0 : cantidad);
                                 }
@@ -88,36 +100,11 @@
                                     reactionJQuery.find('.cantidad').html(cantidadActual-1);
                                 }
 
-
-
-                                function actualizarValoraciones(elementos){
-                                    for(const e of elementos){
-                                        const id = parseInt($( $(e).closest('.publicacion') ).attr('id-publicacion'), 10);
-                                        const publicacion = ($(e).parents('.comentario-wrapper').length == 0) ? 'post' : 'comentario';
-                                        const idValoracion = 1;
-                                        $.ajax({
-                                            type: 'GET',
-                                            url: urlValoracion(idValoracion,publicacion,id),
-                                            data: {idValoracion:idValoracion, publicacion:publicacion, id:id },
-                                            success: function (response) {
-                                                //console.log("respuesta: "+response);
-                                                //alert(mensaje+" cantidad: "+response.toString());
-
-                                            }
-                                        });
-
-
-
-                                    }
-                                }
-
-
                                 $(".like svg").click(function() {
                                     const id = parseInt($( $(this).closest('.publicacion') ).attr('id-publicacion'), 10);
                                     const publicacion = ($(this).parents('.comentario-wrapper').length == 0) ? 'post' : 'comentario';
                                     const parent = $($(this).parent());
                                     let method;
-
 
 
                                     if($(this).children('.svg-clicked').length != 0){
@@ -131,8 +118,6 @@
 
                                     const idValoracion = 1;
                                     const url = urlValoracion(idValoracion,publicacion,id);
-
-
 
                                     //const mensaje = method + " " + publicacion;
 
@@ -149,11 +134,13 @@
 
                                 });
 
-
+                                $(".report-svg > svg").attr('data-bs-toggle',"modal").attr('data-bs-target',"#reporte")
 
                             </script>
                             <script src="{{asset('js/comentario.js')}}"></script>
                     @endprepend
+
+
                 @endonce
             @else
                 @push('scripts')
@@ -173,8 +160,12 @@
 
             </div>
 
-            <div class="report reaction">
+            <div class="report-svg reaction">
                 {!! file_get_contents(asset('svg/report.svg'))!!}
+                <!-- Button trigger modal -->
+
+
+
             </div>
         </div>
             <div class="save-wrapper">
@@ -184,5 +175,8 @@
             </div>
     </div>
 </div>
+
+
+
 @stack('comentario')
 
