@@ -46,6 +46,9 @@
                             <h4>Se unió en:</h4>
                             <div>{{$usuario->created_at}}</div>
                         </div>
+                        <div>
+                            <img src="{{asset('$usuario->imagen')}}" alt="no se pudo cargar la imágen correctamente." width="200">
+                        </div>
                     </div>
 
                 </div>
@@ -53,5 +56,6 @@
         </div>
         <div class="col-3"></div>
     </div>
+
 @endsection
 
