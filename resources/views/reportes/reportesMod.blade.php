@@ -19,8 +19,8 @@
                             @php
                                 $irA = "";
                             @endphp
-
-                            Contra
+                            De {{"@".\App\Models\Usuario::find($reporte->idReportante)->usuario}}
+                            contra
                             @if($reporte->idComentario != null)
                                 un comentario de
                                 @php
