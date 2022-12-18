@@ -16,6 +16,9 @@
                     <div id="header container-fluid">
                         <h2 class="username">{{$usuario->usuario}}</h2>
                     </div>
+                    <div>
+                        <a href="{{route('usuarios.edit', $usuario->usuario)}}">editar perfil</a>
+                    </div>
                     <hr>
                     <div id="content">
                         <div class="container-fluid">
@@ -51,7 +54,6 @@
                             <img src="{{asset('storage').'/' . $usuario->imagen}}" alt="no se pudo cargar la imágen correctamente.">
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
