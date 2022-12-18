@@ -46,4 +46,15 @@ class ReporteController extends Controller
         return view('/reportes/misReportes',['reportes'=>Reporte::reportesDeUnUsuario(Auth::id())]);
     }
 
+    public function mostrarReportes(){
+        return view('/reportes/reportesMod',['reportes'=>Reporte::todosLosReportes()]);
+    }
+
+    public function actualizarReporte(Request $request){
+        $reporte = Reporte::obtenerReporte($request->input('idReporte'));
+        $reporte->idEstadoReporte = $request->input('idEstadoReporte');
+        $reporte->guardar();
+        return to_route('reportes');
+    }
+
 }

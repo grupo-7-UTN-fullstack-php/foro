@@ -30,7 +30,7 @@ class AuthServiceProvider extends ServiceProvider
             return Auth::check() and Usuario::esAdmin(Auth::id());
         });
         Gate::define('mod',function (){
-            return Auth::check() and Usuario::esMod(Auth::id());
+            return Auth::check() and ( Usuario::esMod(Auth::id()) or Usuario::esAdmin(Auth::id()) );
         });
 
         $this->registerPolicies();
