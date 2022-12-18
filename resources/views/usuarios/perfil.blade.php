@@ -38,16 +38,17 @@
                             <h4>Estado:</h4>
                             <div>{{$usuario->descripcionEstado}}</div>
                         </div>
-{{--                        <div class="container-fluid">--}}
-{{--                            <h4>Activo:</h4>--}}
-{{--                            <div>{{$usuario->activo}}</div>--}}
-{{--                        </div>--}}
+                        {{--                        <div class="container-fluid">--}}
+                        {{--                            <h4>Activo:</h4>--}}
+                        {{--                            <div>{{$usuario->activo}}</div>--}}
+                        {{--                        </div>--}}
                         <div class="container-fluid">
                             <h4>Se unió en:</h4>
                             <div>{{$usuario->created_at}}</div>
                         </div>
-                        <div>
-                            <img src="{{asset('$usuario->imagen')}}" alt="no se pudo cargar la imágen correctamente." width="200">
+                        <hr>
+                        <div class="d-flex flex-column px-4 overflow-auto align-items-stretch imagenPerfil">
+                            <img src="{{asset('storage').'/' . $usuario->imagen}}" alt="no se pudo cargar la imágen correctamente.">
                         </div>
                     </div>
 

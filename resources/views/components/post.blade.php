@@ -47,9 +47,9 @@
         <div class="contenido-wrapper imagenPost">
             <div class="contenido d-flex flex-column px-4 overflow-auto align-items-stretch">
                 {{$post->contenido}}
+                <hr>
                 <img src="{{asset('storage') .'/'. $post->imagen}}" alt="no se pudo cargar la imágen correctamente.">
             </div>
-
             <div class="overlay"></div>
         </div>
 
