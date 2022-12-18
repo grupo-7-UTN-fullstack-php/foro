@@ -59,6 +59,9 @@
                                 <li><a class="dropdown-item"
                                        href="{{route('usuarios.show',['username'=> $username ] )}}">
                                         Ver perfil</a></li>
+                                <li><a class="dropdown-item"
+                                       href="{{route('misReportes')}}">
+                                        Ver Reportes</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><form class="logout" method="post" action="{{route('login.destroy')}}">
                                             @csrf

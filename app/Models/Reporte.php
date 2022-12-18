@@ -30,5 +30,13 @@ class Reporte extends ModeloBase
         $reportePost->save();
     }
 
+    public static function reportesDeUnUsuario($idUsuario){
+        return self::where('reporte.idReportante','=',$idUsuario)
+                    ->leftJoin('reporte_comentario','reporte_comentario.idReporte','=','reporte.idReporte')
+                    ->leftJoin('reporte_post','reporte_post.idReporte','=','reporte.idReporte')
+                    ->select('reporte.*','reporte_comentario.idComentario','reporte_post.idPost')
+                    ->get();
+    }
+
     use HasFactory;
 }

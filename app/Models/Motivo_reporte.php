@@ -7,14 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Motivo_reporte extends ModeloBase
 {
-    protected $table = "motivo_reporte";
-    protected $primaryKey = "idMotivo";
+
+    use HasFactory;
+
     protected $guarded = [];
     public $timestamps = false;
+    protected $table = "motivo_reporte";
+    protected $primaryKey = "idMotivo";
+
 
     public static function obtenerTodosLosMotivos(){
         return self::get();
     }
 
-    use HasFactory;
+    public static function motivoDe($idMotivo){
+        return self::where('idMotivo', '=',$idMotivo)->first()->motivo;
+    }
+
+
 }
