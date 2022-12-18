@@ -39,11 +39,11 @@ class ReporteController extends Controller
             $reporte->asociarPublicacion($request->input('publicacion'), $request->input('idPublicacion'));
 
         }
-        return to_route('home');
+        return to_route('misReportes');
     }
 
     public function mostrarReportesDelUsuario(){
-
+        return view('/reportes/misReportes',['reportes'=>Reporte::reportesDeUnUsuario(Auth::id())]);
     }
 
 }
