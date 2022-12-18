@@ -8,13 +8,10 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Carbon;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\ValidatedInput;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
 
 class UsuarioController extends Controller
@@ -54,16 +51,14 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-
         $reglas = [
-
             'usuario' => ['required', 'alpha_num', 'min:2', 'max:45', 'unique:usuario'],
             'nombre' => ['required', 'alpha_num', 'min:2,max:45'],
             'apellido' => ['required', 'alpha_num', 'min:2', 'max:45'],
             'email' => ['required', 'confirmed', 'email:rfc,dns', 'unique:usuario'],
             'password' => ['required', 'confirmed', Password::min(8)->numbers()->mixedCase()],
-            'fecha_nacimiento' => ['required', 'before:-18 years']
-
+            'fecha_nacimiento' => ['required', 'before:-18 years'],
+            'imagen' => ['image']
         ];
         $mensajes = [
             'password' => 'La contraseña debe contener al menos 8 caracteres incluyendo un número, una letra mayúscula y una letra minúscula',
@@ -72,20 +67,29 @@ class UsuarioController extends Controller
         ];
 
         Validator::make($request->all(), $reglas, $mensajes)->validate();
-
         $datosValidados = $request->except(['password_confirmation', 'email_confirmation', 'password']);
 
+
+        $nuevoUsuario = new Usuario;
+        $path = "";
+        if ($request->hasFile("imagen")) {
+            $extension = '.' . $request->file('imagen')->getClientOriginalExtension();
+            $path = $request->file('imagen')->
+            storeAs('/images/post',
+                uniqid('', true) .
+                uniqid('', true) . $extension,
+                'local'
+            );
+        }
         $datosPorDefecto = [
             'password' => Hash::make($request->get('password')),
             'idEstado' => 2,
             'idRol' => 1,
-            'activo' => true
+            'activo' => true,
+            'imagen' => $path
         ];
-
-        $nuevoUsuario = new Usuario;
         $nuevoUsuario->fill(array_merge($datosValidados, $datosPorDefecto));
         $nuevoUsuario->save();
-
         return to_route('usuarios.index');
     }
 
@@ -98,20 +102,21 @@ class UsuarioController extends Controller
     public function show($username)
     {
         $usuario = Usuario::encontrarPorUsername($username);
-        if($usuario == null)
+        if ($usuario == null)
             abort('404');
-        return view('usuarios/perfil',['usuario' => $usuario]);
+        return view('usuarios/perfil', ['usuario' => $usuario]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return Response
+     * @return Application|Factory|View
      */
-    public function edit($id)
+    public function edit($username)
     {
-        //
+        $usuario = Usuario::encontrarPorUsername($username);
+        return view('usuarios/edit', ['titulo' => 'Editar perfil'], compact('usuario'));
     }
 
     /**
