@@ -53,3 +53,6 @@
 .edicion::after{
     margin: 0;
 }
+.imagenPost img{
+    max-width: 100%;
+}

@@ -61,7 +61,6 @@ class PostController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-
         $reglas = [
             'titulo' => ['required', 'min:2', 'max:45', 'unique:post'],
             'contenido' => ['required', 'min:2,max:255'],
@@ -72,16 +71,14 @@ class PostController extends Controller
             'contenido' => 'superaste la cantidad de caracteres permitidos.',
             'imagen' => 'ingrese una imágen válida.'
         ];
-
         Validator::make($request->all(), $reglas, $mensajes)->validate();
         $datosValidados = $request->except(['_token']);//ver estos campos si es que se pasa alguno
-
         $post = new Post();
-        $path="";
+        $path = "";
         if ($request->hasFile("imagen")) {
-            $extension ='.' . $request->file('imagen')->getClientOriginalExtension();
+            $extension = '.' . $request->file('imagen')->getClientOriginalExtension();
             $path = $request->file('imagen')->
-            storeAs('/public/images/post',
+            storeAs('/images/post',
                 uniqid('', true) .
                 uniqid('', true) . $extension,
                 'local'
@@ -97,6 +94,7 @@ class PostController extends Controller
         Post::guardarPost($post);
         return to_route('post.index');
     }
+
     /**
      * Display the specified resource.
      *
@@ -147,7 +145,7 @@ class PostController extends Controller
             'idUsuario' => Post::obtenerPost($id)->idUsuario,//Auth::id(),
             'idEstadoPublicacion' => 1,
             'activo' => true,
-            'imagen'=> Post::obtenerPost($id)->imagen
+            'imagen' => Post::obtenerPost($id)->imagen
         ];
         $post = Post::obtenerPost($id);
         $post->fill(array_merge($datosValidados, $datosPorDefecto));

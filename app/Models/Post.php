@@ -38,12 +38,12 @@ class Post extends ModeloBase
 
     public static function obtenerPost($id)
     {
-//        $post = self::where('post.idPost', '=', $id)->
-//        join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')->first();
         $post = self::where('post.idPost', $id)
             ->join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')
+            ->select('post.*','usuario.idUsuario','usuario.usuario','usuario.idEstado','usuario.idRol')
             ->first();
         $post->valoraciones = Valoracion_post::obtenerCantidadTodasValoraciones($post->idPost);
+//        dd($post->imagen);
         return $post;
     }
 
