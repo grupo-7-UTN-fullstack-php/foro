@@ -8,6 +8,7 @@
     margin: 1%;
     text-align: left;
     font-size: 1.4rem;
+
 }
 .username{
     padding-left: 0;
@@ -16,4 +17,7 @@
     display: inline-flex;
     align-items: baseline;
     justify-content: space-between;
+}
+.imagenPerfil img{
+    max-width: 100%;
 }
