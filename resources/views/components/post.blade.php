@@ -44,15 +44,15 @@
                 </div>
             @endif
         </div>
-        <div class="contenido-wrapper">
+        <div class="contenido-wrapper imagenPost">
             <div class="contenido d-flex flex-column px-4 overflow-auto align-items-stretch">
                 {{$post->contenido}}
-            </div>
-            <div class="imagenPost">
                 <img src="{{asset('storage') .'/'. $post->imagen}}" alt="no se pudo cargar la imágen correctamente.">
             </div>
+
             <div class="overlay"></div>
         </div>
+
     </div>
     <x-reaction-bar id="{{$post->idPost}}" :publicacion="$post" :clase="\App\Models\Valoracion_post_usuario::class"/>
     <div>

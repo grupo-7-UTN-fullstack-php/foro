@@ -55,7 +55,9 @@ class Post extends ModeloBase
     public static function obtenerTodosLosPosts()
     {
 
-        $posts = self::join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')->get();
+        $posts = self::join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')
+            ->select('post.*','usuario.idUsuario','usuario.usuario','usuario.idEstado','usuario.idRol')
+            ->get();
 
         foreach ($posts as $post) {
             $post->valoraciones = Valoracion_post::obtenerCantidadTodasValoraciones($post->idPost);
@@ -68,7 +70,9 @@ class Post extends ModeloBase
     public static function obtenerPostsDeUnUsuario(int $id)
     {
         return self::where('post.idUsuario', '=', $id)->
-        join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')->get();
+        join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')
+            ->select('post.*','usuario.idUsuario','usuario.usuario','usuario.idEstado','usuario.idRol')
+            ->get();
     }
 
     public static function incrementarCantidadComentariosPost(Post $post): void
