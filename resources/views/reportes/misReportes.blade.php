@@ -50,7 +50,7 @@
                                     Ir a Post
                                     @endif
                                 </a>
-                                <h6 >Estado: Abierto</h6>
+                                <h6 >Estado: {{\App\Models\Estado_reporte::nombreDe($reporte->idEstadoReporte)}}</h6>
                             </div>
 
                         </div>

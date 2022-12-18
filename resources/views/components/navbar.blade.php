@@ -11,10 +11,12 @@
                 <div class="navbar-nav justify-content-evenly">
                     <div class="container">
                         <div class="navbar-nav justify-content-start">
-                            <a class="nav-item nav-link" href="{{route('post.index')}}">Mis posts</a>
                             <a class="nav-item nav-link" href="{{route('post.create')}}">Postear</a>
                             @can('admin')
                             <a class="nav-item nav-link" href="{{route('usuarios.index')}}">Usuarios</a>
+                            @endcan
+                            @can('mod')
+                                <a class="nav-item nav-link" href="{{route('reportes')}}">Reportes</a>
                             @endcan
                         </div>
                     </div>
@@ -62,6 +64,7 @@
                                 <li><a class="dropdown-item"
                                        href="{{route('misReportes')}}">
                                         Ver Reportes</a></li>
+                                <li><a class="dropdown-item" href="{{route('post.index')}}">Mis posts</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><form class="logout" method="post" action="{{route('login.destroy')}}">
                                             @csrf

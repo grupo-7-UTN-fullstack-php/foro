@@ -58,5 +58,7 @@ Route::get('/texteditor', function () {
 //Reportes
 Route::post('/reportar', [\App\Http\Controllers\ReporteController::class, 'store'])->middleware('auth')->name('reportar');
 Route::get('/misReportes', [\App\Http\Controllers\ReporteController::class, 'mostrarReportesDelUsuario'])->name('misReportes');
+Route::get('/reportes', [\App\Http\Controllers\ReporteController::class, 'mostrarReportes'])->name('reportes')->middleware('can:mod');
+Route::patch('/reportes', [\App\Http\Controllers\ReporteController::class, 'actualizarReporte'])->name('reportes.update')->middleware('can:mod');
 //Perfil
 //Route::resource('perfil', PerfilController::class)->middleware('auth');

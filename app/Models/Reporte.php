@@ -38,5 +38,16 @@ class Reporte extends ModeloBase
                     ->get();
     }
 
+    public static function todosLosReportes(){
+        return self::leftJoin('reporte_comentario','reporte_comentario.idReporte','=','reporte.idReporte')
+            ->leftJoin('reporte_post','reporte_post.idReporte','=','reporte.idReporte')
+            ->select('reporte.*','reporte_comentario.idComentario','reporte_post.idPost')
+            ->get();
+    }
+
+    public static function obtenerReporte($idReporte){
+        return self::find($idReporte);
+    }
+
     use HasFactory;
 }
