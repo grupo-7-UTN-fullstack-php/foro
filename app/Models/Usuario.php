@@ -3,13 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Schema;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property bool $activo
+ */
 class Usuario extends Authenticatable
 {
+    use SoftDeletes;
 
     protected $guarded = [];
 
@@ -43,7 +48,6 @@ class Usuario extends Authenticatable
         $usuario = self::where('usuario.idUsuario', '=', $id)->join('rol', 'rol.idRol', '=', 'usuario.idRol')->
         join('estado_usuario', 'estado_usuario.idEstado', '=', 'usuario.idEstado')->
         select('usuario.idUsuario', 'usuario.usuario', 'usuario.idEstado', 'usuario.idRol')->first();
-//        $usuario = self::findOrFail($id);
         return $usuario;
     }
 
@@ -96,5 +100,19 @@ class Usuario extends Authenticatable
         return self::find($id)->idRol == 3;
     }
 
+    public static function bajaLogica($username)
+    {
+        $usuario = self::encontrarPorUsername($username);
+        $usuario->runSoftDelete();
+        $usuario->activo = false;
+        $usuario->save();
+    }
 
+    public static function altaLogica(int $id)
+    {
+        $usuario = self::obtenerUsuario($id);
+        $usuario->restore();
+        $usuario->activo = true;
+        $usuario->save();
+    }
 }

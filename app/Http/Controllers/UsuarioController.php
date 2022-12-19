@@ -143,9 +143,6 @@ class UsuarioController extends Controller
             'fecha_nacimiento' => 'Debe ser mayor de 18 años'
         ];
 
-
-//        $nuevoUsuario->delete('imagen');
-//        $nuevoUsuario->delete();
 //        Validator::make($request->all(), $reglas, $mensajes)->validate();
         $datosValidados = $request->except(['password_confirmation', 'email_confirmation', 'password']);
         $path = "";
@@ -176,11 +173,13 @@ class UsuarioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return Response
+//     * @param int $id
+     * @return string
      */
-    public function destroy($id)
+    public function destroy($username)
     {
-        //
+//        dd($usuario);
+        Usuario::bajaLogica($username);
+        return to_route('home');
     }
 }

@@ -17,7 +17,14 @@
                         <h2 class="username">{{$usuario->usuario}}</h2>
                     </div>
                     <div>
-                        <a href="{{route('usuarios.edit', $usuario->usuario)}}">editar perfil</a>
+                        <a href="{{route('usuarios.edit', $usuario->usuario)}}">Editar perfil</a>
+                    </div>
+                    <div>
+                        <form action="{{route('usuarios.destroy', $usuario->usuario)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="dropdown-item">Dar de baja éste usuario</button>
+                        </form>
                     </div>
                     <hr>
                     <div id="content">
