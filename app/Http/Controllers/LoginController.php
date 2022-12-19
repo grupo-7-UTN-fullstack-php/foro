@@ -32,22 +32,20 @@ class LoginController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        if(Auth::attempt(
+        if (Auth::attempt(
             [
                 'email' => $request->post('email'),
                 'password' => $request->post('password')
             ]
-        ))
-        {
-           $request->session()->regenerate();
-           return redirect()->intended(route('home'));
-        }
-        else{
+        )) {
+            $request->session()->regenerate();
+            return redirect()->intended(route('home'));
+        } else {
             return back()->withErrors([
                 'email' => 'El email no se ha encontrado',
                 'password' => 'Contraseña incorrecta'
@@ -58,7 +56,7 @@ class LoginController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function show($id)
@@ -69,7 +67,7 @@ class LoginController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function edit($id)
@@ -80,8 +78,8 @@ class LoginController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -92,7 +90,7 @@ class LoginController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function destroy(Request $request)

@@ -12,7 +12,8 @@
             @csrf
             <div class="col-md-6 col-xs-6 col-sm-12">
                 <label for="usuario" class="form-label">Usuario:</label>
-                <input type="text" class="form-control @error('usuario') is-invalid @enderror" value="{{old('usuario')}}"
+                <input type="text" class="form-control @error('usuario') is-invalid @enderror"
+                       value="{{old('usuario')}}"
                        id="usuario" placeholder="Ingrese su nombre de usuario" minlength="2" required name="usuario">
                 @error('usuario')
                 <div class="alert alert-danger" class="form-label">{{$message}}</div>
@@ -29,9 +30,19 @@
             </div>
             <div class="col-md-6 col-xs-6 col-sm-6">
                 <label for="apellido" class="form-label">Apellido:</label>
-                <input type="text" class="form-control @error('apellido') is-invalid @enderror" value="{{old('apellido')}}"
+                <input type="text" class="form-control @error('apellido') is-invalid @enderror"
+                       value="{{old('apellido')}}"
                        id="apellido" name="apellido" placeholder="Ingrese su apellido" minlength="2" required>
                 @error('apellido')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
+            </div>
+            <div class="col-md-6 col-xs-6 col-sm-6">
+                <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento:</label>
+                <input type="date" class="form-control  @error('fecha_nacimiento') is-invalid @enderror"
+                       value="{{old('fecha_nacimiento')}}"
+                       id="fecha_nacimiento" name="fecha_nacimiento" required>
+                @error('fecha_nacimiento')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
             </div>
@@ -53,16 +64,6 @@
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
             </div>
-            <div class="col-md-6 col-xs-6 col-sm-6">
-                <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento:</label>
-                <input type="date" class="form-control  @error('fecha_nacimiento') is-invalid @enderror"
-                       value="{{old('fecha_nacimiento')}}"
-                       id="fecha_nacimiento" name="fecha_nacimiento" required>
-                @error('fecha_nacimiento')
-                <div class="alert alert-danger">{{$message}}</div>
-                @enderror
-            </div>
-
             <div class="col-md-6 col-xs-6 col-sm-6">
                 <label for="password" class="form-label">Contraseña:</label>
                 <input type="password" class="form-control  @error('password') is-invalid @enderror"

@@ -123,12 +123,54 @@ class UsuarioController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param int $id
+//     * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $username)
     {
-        //
+        $reglas = [
+            'usuario' => ['required', 'alpha_num', 'min:2', 'max:45', 'unique:usuario'],
+            'nombre' => ['required', 'alpha_num', 'min:2,max:45'],
+            'apellido' => ['required', 'alpha_num', 'min:2', 'max:45'],
+            'email' => ['required', 'confirmed', 'email:rfc,dns', 'unique:usuario'],
+            'password' => ['required', 'confirmed', Password::min(8)->numbers()->mixedCase()],
+            'fecha_nacimiento' => ['required', 'before:-18 years'],
+            'imagen' => ['image','required']
+        ];
+        $mensajes = [
+            'password' => 'La contraseña debe contener al menos 8 caracteres incluyendo un número, una letra mayúscula y una letra minúscula',
+            'email.email' => 'Debe ingresar un email valido',
+            'fecha_nacimiento' => 'Debe ser mayor de 18 años'
+        ];
+
+        Validator::make($request->all(), $reglas, $mensajes)->validate();
+        $datosValidados = $request->except(['password_confirmation', 'email_confirmation', 'password']);
+
+
+        $nuevoUsuario = Usuario::encontrarPorUsername($username);
+        $nuevoUsuario->delete('imagen');
+        $nuevoUsuario->delete();
+        $path = "";
+        if ($request->hasFile("imagen")) {
+            $extension = '.' . $request->file('imagen')->getClientOriginalExtension();
+            $path = $request->file('imagen')->
+            storeAs('/images/post',
+                uniqid('', true) .
+                uniqid('', true) . $extension,
+                'local'
+            );
+        }
+        $datosPorDefecto = [
+            'password' => Hash::make($request->get('password')),
+            'idEstado' => 2,
+            'idRol' => 1,
+            'activo' => true,
+            'imagen' => $path
+        ];
+        $nuevoUsuario->fill(array_merge($datosValidados, $datosPorDefecto));
+        dd($nuevoUsuario);
+        $nuevoUsuario->save();
+        return to_route('usuarios.index');
     }
 
     /**
