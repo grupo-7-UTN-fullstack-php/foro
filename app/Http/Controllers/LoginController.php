@@ -49,7 +49,7 @@ class LoginController extends Controller
         }
         else{
             return back()->withErrors([
-                'email' => 'El email no existe',
+                'email' => 'El email no se ha encontrado',
                 'password' => 'Contraseña incorrecta'
             ]);
         }
