@@ -8,7 +8,7 @@
         <H1>{{$titulo}}</H1>
     </header>
     <div class="container">
-        <form class="row g-3" action="{{route('post.update',$post->idPost)}}" method="post">
+        <form class="row g-3" action="{{route('post.update', $post->idPost)}}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-3">

@@ -90,7 +90,7 @@ class UsuarioController extends Controller
         ];
         $nuevoUsuario->fill(array_merge($datosValidados, $datosPorDefecto));
         $nuevoUsuario->save();
-        return to_route('usuarios/login');
+        return to_route('home');
     }
 
     /**
@@ -110,7 +110,6 @@ class UsuarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
      * @return Application|Factory|View
      */
     public function edit($username)
@@ -123,11 +122,12 @@ class UsuarioController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-//     * @param int $id
-     * @return Response
+     * //     * @param int $id
+     * @return Application|Factory|View
      */
     public function update(Request $request, $username)
     {
+        $nuevoUsuario = Usuario::encontrarPorUsername($username);
         $reglas = [
             'usuario' => ['required', 'alpha_num', 'min:2', 'max:45', 'unique:usuario'],
             'nombre' => ['required', 'alpha_num', 'min:2,max:45'],
@@ -135,17 +135,18 @@ class UsuarioController extends Controller
             'email' => ['required', 'confirmed', 'email:rfc,dns', 'unique:usuario'],
             'password' => ['required', 'confirmed', Password::min(8)->numbers()->mixedCase()],
             'fecha_nacimiento' => ['required', 'before:-18 years'],
-            'imagen' => ['image','required']
+            'imagen' => ['image', 'required']
         ];
         $mensajes = [
             'password' => 'La contraseña debe contener al menos 8 caracteres incluyendo un número, una letra mayúscula y una letra minúscula',
             'email.email' => 'Debe ingresar un email valido',
             'fecha_nacimiento' => 'Debe ser mayor de 18 años'
         ];
-        $nuevoUsuario = Usuario::encontrarPorUsername($username);
-        $nuevoUsuario->delete('imagen');
-        $nuevoUsuario->delete();
-        Validator::make($request->all(), $reglas, $mensajes)->validate();
+
+
+//        $nuevoUsuario->delete('imagen');
+//        $nuevoUsuario->delete();
+//        Validator::make($request->all(), $reglas, $mensajes)->validate();
         $datosValidados = $request->except(['password_confirmation', 'email_confirmation', 'password']);
         $path = "";
         if ($request->hasFile("imagen")) {
@@ -156,17 +157,20 @@ class UsuarioController extends Controller
                 uniqid('', true) . $extension,
                 'local'
             );
+        } else {
+            $path = $nuevoUsuario->imagen;
         }
         $datosPorDefecto = [
-            'password' => Hash::make($request->get('password')),
+            'password' => $nuevoUsuario->password,
             'idEstado' => 2,
             'idRol' => 1,
             'activo' => true,
             'imagen' => $path
         ];
         $nuevoUsuario->fill(array_merge($datosValidados, $datosPorDefecto));
+//        dd($nuevoUsuario);
         $nuevoUsuario->save();
-        return to_route('usuarios.login');
+        return view('usuarios/perfil', ['usuario' => $nuevoUsuario]);
     }
 
     /**

@@ -40,7 +40,7 @@ class Post extends ModeloBase
     {
         $post = self::where('post.idPost', $id)
             ->join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')
-            ->select('post.*','usuario.idUsuario','usuario.usuario','usuario.idEstado','usuario.idRol')
+            ->select('post. *', 'usuario.idUsuario', 'usuario.usuario', 'usuario.idEstado', 'usuario.idRol')
             ->first();
         $post->valoraciones = Valoracion_post::obtenerCantidadTodasValoraciones($post->idPost);
 //        dd($post->imagen);
@@ -56,7 +56,7 @@ class Post extends ModeloBase
     {
 
         $posts = self::join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')
-            ->select('post.*','usuario.idUsuario','usuario.usuario','usuario.idEstado','usuario.idRol')
+            ->select('post.*', 'usuario.idUsuario', 'usuario.usuario', 'usuario.idEstado', 'usuario.idRol')
             ->get();
 
         foreach ($posts as $post) {
@@ -71,7 +71,7 @@ class Post extends ModeloBase
     {
         return self::where('post.idUsuario', '=', $id)->
         join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')
-            ->select('post.*','usuario.idUsuario','usuario.usuario','usuario.idEstado','usuario.idRol')
+            ->select('post.*', 'usuario.idUsuario', 'usuario.usuario', 'usuario.idEstado', 'usuario.idRol')
             ->get();
     }
 

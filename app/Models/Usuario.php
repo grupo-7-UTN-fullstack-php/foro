@@ -3,10 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Schema;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -28,13 +26,25 @@ class Usuario extends Authenticatable
     protected $table = "usuario";
     protected $primaryKey = "idUsuario";
 
-    public static function encontrarPorUsername($username){
+    public static function encontrarPorUsername($username)
+    {
         $usuario = self::where('usuario.usuario', '=', $username)->join('rol', 'usuario.idRol', '=', 'usuario.idRol')->
         join('estado_usuario', 'usuario.idEstado', '=', 'estado_usuario.idEstado')->get();
         return ($usuario->isEmpty()) ? null : $usuario[0];
     }
-    public static function encontrarUsername($id){
+
+    public static function encontrarUsername($id)
+    {
         return self::find($id);
+    }
+
+    public static function obtenerUsuario($id)
+    {
+        $usuario = self::where('usuario.idUsuario', '=', $id)->join('rol', 'rol.idRol', '=', 'usuario.idRol')->
+        join('estado_usuario', 'estado_usuario.idEstado', '=', 'usuario.idEstado')->
+        select('usuario.idUsuario', 'usuario.usuario', 'usuario.idEstado', 'usuario.idRol')->first();
+//        $usuario = self::findOrFail($id);
+        return $usuario;
     }
 
     /**
@@ -54,7 +64,6 @@ class Usuario extends Authenticatable
     }
 
 
-
     /**
      * @return string
      */
@@ -71,17 +80,19 @@ class Usuario extends Authenticatable
         $this->usuario = $usuario;
     }
 
-    public static function getColumns() : array
+    public static function getColumns(): array
     {
         global $table;
         return Schema::getColumnListing("usuario");
     }
 
-    public static function esMod($id){
+    public static function esMod($id)
+    {
         return self::find($id)->idRol == 2;
     }
 
-    public static function esAdmin($id){
+    public static function esAdmin($id)
+    {
         return self::find($id)->idRol == 3;
     }
 
