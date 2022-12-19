@@ -51,7 +51,8 @@
                         </div>
                         <hr>
                         <div class="d-flex flex-column px-4 overflow-auto align-items-stretch imagenPerfil">
-                            <img src="{{asset('storage').'/' . $usuario->imagen}}" alt="no se pudo cargar la imágen correctamente.">
+                            <img src="{{asset('storage').'/' . $usuario->imagen}}"
+                                 alt="no se pudo cargar la imágen correctamente.">
                         </div>
                     </div>
                 </div>

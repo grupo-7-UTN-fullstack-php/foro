@@ -115,7 +115,6 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::obtenerPost($id);
-//        return $post;
         return view("posteos/edit", ['titulo' => 'Editar post'], compact('post'));
     }
 

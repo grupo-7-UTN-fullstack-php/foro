@@ -90,14 +90,14 @@ class UsuarioController extends Controller
         ];
         $nuevoUsuario->fill(array_merge($datosValidados, $datosPorDefecto));
         $nuevoUsuario->save();
-        return to_route('usuarios.index');
+        return to_route('usuarios/login');
     }
 
     /**
      * Display the specified resource.
      *
      * @param int $id
-     * @return Response
+     * @return Application|Factory|View
      */
     public function show($username)
     {
@@ -142,14 +142,11 @@ class UsuarioController extends Controller
             'email.email' => 'Debe ingresar un email valido',
             'fecha_nacimiento' => 'Debe ser mayor de 18 años'
         ];
-
-        Validator::make($request->all(), $reglas, $mensajes)->validate();
-        $datosValidados = $request->except(['password_confirmation', 'email_confirmation', 'password']);
-
-
         $nuevoUsuario = Usuario::encontrarPorUsername($username);
         $nuevoUsuario->delete('imagen');
         $nuevoUsuario->delete();
+        Validator::make($request->all(), $reglas, $mensajes)->validate();
+        $datosValidados = $request->except(['password_confirmation', 'email_confirmation', 'password']);
         $path = "";
         if ($request->hasFile("imagen")) {
             $extension = '.' . $request->file('imagen')->getClientOriginalExtension();
@@ -168,9 +165,8 @@ class UsuarioController extends Controller
             'imagen' => $path
         ];
         $nuevoUsuario->fill(array_merge($datosValidados, $datosPorDefecto));
-        dd($nuevoUsuario);
         $nuevoUsuario->save();
-        return to_route('usuarios.index');
+        return to_route('usuarios.login');
     }
 
     /**
