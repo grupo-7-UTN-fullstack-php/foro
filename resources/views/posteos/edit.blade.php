@@ -8,7 +8,8 @@
         <H1>{{$titulo}}</H1>
     </header>
     <div class="container">
-        <form class="row g-3" action="{{route('post.update', $post->idPost)}}" method="post" enctype="multipart/form-data">
+        <form class="row g-3" action="{{route('post.update', $post->idPost)}}" method="post"
+              enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -28,6 +29,10 @@
                 @error('textarea')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
+            </div>
+            <div>
+                <label for="">Cambiar imágen</label>
+                <input type="file" name="imagen" accept="images/*">
             </div>
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Actualizar post</button>

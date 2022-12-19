@@ -128,6 +128,7 @@ class PostController extends Controller
      */
     public function update(Request $request, int $id): RedirectResponse
     {
+        $post = Post::obtenerPost($id);
         $reglas = [
             'titulo' => ['required', 'min:2', 'max:45'],
             'contenido' => ['required', 'min:2,max:255'],
@@ -140,11 +141,23 @@ class PostController extends Controller
 
         Validator::make($request->all(), $reglas, $mensajes)->validate();
         $datosValidados = $request->except(['_token']);//ver estos campos si es que se pasa alguno
+        $path = "";
+        if ($request->hasFile("imagen")) {
+            $extension = '.' . $request->file('imagen')->getClientOriginalExtension();
+            $path = $request->file('imagen')->
+            storeAs('/images/post',
+                uniqid('', true) .
+                uniqid('', true) . $extension,
+                'local'
+            );
+        } else {
+            $path = $post->imagen;
+        }
         $datosPorDefecto = [
-            'idUsuario' => Post::obtenerPost($id)->idUsuario,//Auth::id(),
+            'idUsuario' => $post->idUsuario,
             'idEstadoPublicacion' => 1,
             'activo' => true,
-            'imagen' => Post::obtenerPost($id)->imagen
+            'imagen' => $path
         ];
         $post = Post::obtenerPost($id);
         $post->fill(array_merge($datosValidados, $datosPorDefecto));
