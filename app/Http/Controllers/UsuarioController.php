@@ -160,9 +160,9 @@ class UsuarioController extends Controller
         }
         $datosPorDefecto = [
             'password' => $nuevoUsuario->password,
-            'idEstado' => 2,
-            'idRol' => 1,
-            'activo' => true,
+            'idEstado' => $nuevoUsuario->idEstado,
+            'idRol' => $nuevoUsuario->idRol,
+            'activo' => $nuevoUsuario->activo,
             'imagen' => $path
         ];
         $nuevoUsuario->fill(array_merge($datosValidados, $datosPorDefecto));
