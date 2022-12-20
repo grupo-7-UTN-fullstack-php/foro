@@ -42,7 +42,7 @@ class Post extends ModeloBase
             ->join('usuario', 'usuario.idUsuario', '=', 'post.idUsuario')
             ->select('post.*', 'usuario.idUsuario', 'usuario.usuario', 'usuario.idEstado', 'usuario.idRol')
             ->first();
-        $post->valoraciones = Valoracion_post::obtenerCantidadTodasValoraciones($post->idPost);
+        $post->valoraciones = Valoracion_post::obtenerCantidadTodasValoraciones($id);
 //        dd($post->imagen);
         return $post;
     }
