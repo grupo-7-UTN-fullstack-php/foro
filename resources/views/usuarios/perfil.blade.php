@@ -26,7 +26,7 @@
                         {{--                            <button class="dropdown-item link-primary" data-bs-target="#myModal">Dar de baja éste usuario</button>--}}
                         {{--                        </form>--}}
                         <!-- Button trigger modal -->
-                        <button type="button" class="dropdown-item link-primary" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-link" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                             Dar de baja
                         </button>
