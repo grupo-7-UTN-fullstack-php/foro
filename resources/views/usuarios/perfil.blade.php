@@ -17,16 +17,16 @@
                         <h2 class="username">{{$usuario->usuario}}</h2>
                     </div>
                     <div>
-                        <a href="{{route('usuarios.edit', $usuario->usuario)}}">Editar perfil</a>
-                    </div>
-                    <div>
+                        <a class="btn btn-primary" href="{{route('usuarios.edit', $usuario->usuario)}}">Editar perfil</a>
+{{--                    </div>--}}
+                        {{--                    <div>--}}
                         {{--                        <form action="{{route('usuarios.destroy', $usuario->usuario)}}" method="post">--}}
                         {{--                            @csrf--}}
                         {{--                            @method('DELETE')--}}
                         {{--                            <button class="dropdown-item link-primary" data-bs-target="#myModal">Dar de baja éste usuario</button>--}}
                         {{--                        </form>--}}
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-link" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                             Dar de baja
                         </button>
