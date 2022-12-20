@@ -57,6 +57,9 @@
                 @error('email')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
+                <div class="col-12 mt-3">
+                    <a href="{{route('usuarios.cambiar_pass')}}" class="btn btn-primary">Cambiar Contraseña</a>
+                </div>
             </div>
             <div class="col-md-6 col-xs-6 col-sm-6">
                 <label for="email_confirmation" class="form-label">Confirmar Email:</label>
@@ -67,6 +70,7 @@
                 @error('email_confirmation')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
+
             </div>
 
 {{--            <div class="col-md-6 col-xs-6 col-sm-6">--}}

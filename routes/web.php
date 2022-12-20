@@ -28,6 +28,8 @@ Route::resource("usuarios", UsuarioController::class, ['except' => ['create', 'i
 Route::get('/usuarios', [UsuarioController::class, 'index'])
     ->middleware('auth')->middleware('can:admin')->name('usuarios.index');
 Route::get('perfil/{username}', [UsuarioController::class, 'show'])->name('usuarios.show');
+Route::get('/cambiar_contraseña',function () {return view('usuarios/cambiar_password');})->middleware('auth')->name('usuarios.cambiar_pass');
+Route::post('/cambiar_contraseña',[UsuarioController::class, 'cambiar_password'])->middleware('auth')->name('usuarios.update_pass');
 
 //Post
 Route::resource('/post', PostController::class)->except(['show'])->middleware('auth');

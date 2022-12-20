@@ -122,7 +122,7 @@
         </div>
             <div class="save-wrapper">
                 <a href="" class="save reaction">
-                    {!! file_get_contents(asset('svg/bookmark.svg'))!!}
+                   {{-- {!! file_get_contents(asset('svg/bookmark.svg'))!!}--}}
                 </a>
             </div>
     </div>

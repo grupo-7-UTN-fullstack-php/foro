@@ -24,10 +24,10 @@
             <div class="container">
                 <div class="">
                     <div class="navbar-nav justify-content-center">
-                        <form class="search-bar" role="search">
+                       {{-- <form class="search-bar" role="search">
                             <input class="form-control me-2" type="search" placeholder="Search"
                                    aria-label="Search">
-                        </form>
+                        </form>--}}
                     </div>
                 </div>
             </div>

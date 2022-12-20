@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
@@ -22,6 +23,25 @@ class UsuarioController extends Controller
      * @return Application|Factory|View
      */
 
+
+    public function cambiar_password(Request $request){
+        $usuario = Auth::user();
+        $reglas = [
+
+            'password_vieja' => ['required','current_password'],
+            'password' => ['required', 'confirmed', Password::min(8)->numbers()->mixedCase()],
+            'password_confirmation' => ['required'],
+        ];
+        $mensajes = [
+            'password' => 'La contraseña debe contener al menos 8 caracteres incluyendo un número, una letra mayúscula y una letra minúscula',
+            'password_vieja' => 'La contraseña actual ingresada no es correcta'
+        ];
+
+        Validator::make($request->all(), $reglas, $mensajes)->validate();
+        $usuario->password = Hash::make($request->get('password'));
+        $usuario->save();
+        return view('home');
+    }
 
     public function index()
     {
