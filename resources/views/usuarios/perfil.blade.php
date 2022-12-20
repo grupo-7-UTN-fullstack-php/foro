@@ -17,8 +17,9 @@
                         <h2 class="username">{{$usuario->usuario}}</h2>
                     </div>
                     <div>
-                        <a class="btn btn-primary" href="{{route('usuarios.edit', $usuario->usuario)}}">Editar perfil</a>
-{{--                    </div>--}}
+                        <a class="btn btn-primary" href="{{route('usuarios.edit', $usuario->usuario)}}">Editar
+                            perfil</a>
+                        {{--                    </div>--}}
                         {{--                    <div>--}}
                         {{--                        <form action="{{route('usuarios.destroy', $usuario->usuario)}}" method="post">--}}
                         {{--                            @csrf--}}

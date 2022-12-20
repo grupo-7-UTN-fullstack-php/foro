@@ -33,7 +33,7 @@ class Usuario extends Authenticatable
 
     public static function encontrarPorUsername($username)
     {
-        $usuario = self::where('usuario.usuario', '=', $username)->join('rol', 'usuario.idRol', '=', 'usuario.idRol')->
+        $usuario = self::where('usuario.usuario', '=', $username)->join('rol', 'rol.idRol', '=', 'usuario.idRol')->
         join('estado_usuario', 'usuario.idEstado', '=', 'estado_usuario.idEstado')->get();
         return ($usuario->isEmpty()) ? null : $usuario[0];
     }
@@ -48,6 +48,7 @@ class Usuario extends Authenticatable
         $usuario = self::where('usuario.idUsuario', '=', $id)->join('rol', 'rol.idRol', '=', 'usuario.idRol')->
         join('estado_usuario', 'estado_usuario.idEstado', '=', 'usuario.idEstado')->
         select('usuario.idUsuario', 'usuario.usuario', 'usuario.idEstado', 'usuario.idRol')->first();
+
         return $usuario;
     }
 

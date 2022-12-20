@@ -104,6 +104,7 @@ class UsuarioController extends Controller
         $usuario = Usuario::encontrarPorUsername($username);
         if ($usuario == null)
             abort('404');
+//        dd($usuario);
         return view('usuarios/perfil', ['usuario' => $usuario]);
     }
 
