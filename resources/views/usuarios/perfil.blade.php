@@ -20,11 +20,47 @@
                         <a href="{{route('usuarios.edit', $usuario->usuario)}}">Editar perfil</a>
                     </div>
                     <div>
-                        <form action="{{route('usuarios.destroy', $usuario->usuario)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="dropdown-item">Dar de baja éste usuario</button>
-                        </form>
+                        {{--                        <form action="{{route('usuarios.destroy', $usuario->usuario)}}" method="post">--}}
+                        {{--                            @csrf--}}
+                        {{--                            @method('DELETE')--}}
+                        {{--                            <button class="dropdown-item link-primary" data-bs-target="#myModal">Dar de baja éste usuario</button>--}}
+                        {{--                        </form>--}}
+                        <!-- Button trigger modal -->
+                        <button type="button" class="dropdown-item link-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                            Dar de baja
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Está a punto de eliminar el
+                                            usuario</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Está seguro que lo quiere eliminar?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar
+                                        </button>
+                                        <form action="{{route('usuarios.destroy', $usuario->usuario)}}"
+                                              method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-primary">
+                                                Eliminar usuario
+                                            </button>
+                                        </form>
+                                        {{--<button type="button" class="btn btn-primary">Eliminar usuario</button>--}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <hr>
                     <div id="content">
